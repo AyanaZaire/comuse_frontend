@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 
 const NavBar = props => {
-  console.log('Nav bar member props', props.member)
+  // console.log('Nav bar member props', props.member)
 
   return (
     <div className={`ui inverted ${props.color} menu navbar`}>

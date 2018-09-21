@@ -15,11 +15,13 @@ class LogIn extends Component {
       password: e.target.querySelector('input[name="password"]').value
     });
 
+    // debugger
+
     fetch(baseUrl + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json"
       },
       body: data
     })
@@ -27,7 +29,7 @@ class LogIn extends Component {
         if (res.status === 401) {
           alert("login failed");
         } else {
-          return res.json();
+          return res.json()
         }
       })
       .then(json => {

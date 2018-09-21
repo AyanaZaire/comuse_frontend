@@ -28,7 +28,7 @@ class Member extends Component {
 
 
   render() {
-    console.log("Edit form authentication", this.props.currentMember.id === this.props.member.id)
+    // console.log("Edit form authentication", this.props.currentMember.id === this.props.member.id)
     return this.props.member ? (
       <div className="container">
         <div>
@@ -47,12 +47,12 @@ class Member extends Component {
           <h3>Reviews</h3>
             <p>From Students</p>
             <p>From Teachers</p>
-           {this.props.currentMember.id === this.props.member.id ? (
+           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
              <Form
              onSubmit={ e => {
                e.preventDefault()
-               this.props.handleEditMember(this.state.value, this.props.member.id)
-               this.props.history.push('/')
+               this.props.handleEditMember(this.state.value, this.props.member.id, e)
+               this.props.history.push(`/member/${this.props.member.id}`)
              }}><h3>Edit User Profile:</h3>
              <Form.Group widths='equal'>
                <Form.Input
