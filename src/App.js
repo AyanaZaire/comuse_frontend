@@ -7,6 +7,7 @@ import NavBar from './components/NavBar.js'
 import LogIn from './components/LogIn.js'
 import Signup from './components/Signup.js'
 import Member from './components/Member.js'
+import SectionContainer from './containers/SectionContainer.js'
 
 const requestHelper = url =>
   fetch(url, {
@@ -28,7 +29,8 @@ class App extends Component {
 
   state = {
     member: null,
-    allMembers: []
+    allMembers: [],
+    allSections: []
   }
 
   fetchMembers = () => {
@@ -73,11 +75,12 @@ class App extends Component {
     e.currentTarget.reset()
   }
 
-  handleEditMember = (value, id) => {
-    console.log("Edit User", value, id)
+  handleEditMember = (value, id, e) => {
+    // console.log("Edit User", value, id)
     fetch(URL + `/${id}`, {
       method: "PATCH",
       headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
@@ -93,7 +96,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
+      // console.log("response data", data)
       let editedMember = this.state.allMembers.map(member => {
         if (member.id === id) {
           return data
@@ -105,13 +108,7 @@ class App extends Component {
         allMembers: editedMember
       })
     })
-  }
-
-  componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.fetchMember();
-    }
-    this.fetchMembers();
+    e.currentTarget.reset()
   }
 
   handleLogOut = (e) => {
@@ -119,6 +116,22 @@ class App extends Component {
       member: null
     });
     localStorage.clear();
+  }
+
+  fetchSections = () => {
+    fetch('http://localhost:3000/api/v1/section')
+      .then(response => response.json())
+      .then(allSections => {
+        this.setState({ allSections });
+      });
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.fetchMember();
+    }
+    this.fetchMembers();
+    this.fetchSections();
   }
 
 
@@ -135,6 +148,19 @@ class App extends Component {
           handleLogOut={this.handleLogOut}
         />
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return(
+                <div className="App">
+                  <SectionContainer
+                    sections={this.state.allSections}
+                  />
+                </div>
+              )
+            }}
+          />
           <Route
             path="/login"
             render={() => {
