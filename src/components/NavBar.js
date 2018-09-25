@@ -63,6 +63,8 @@ const NavBar = props => {
 
       {props.member ? (
         <Button
+          color='black'
+          size='small'
           onClick={e=>{
             props.handleLogOut(e)
           }}>Log Out</Button>

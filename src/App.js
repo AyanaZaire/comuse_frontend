@@ -7,6 +7,7 @@ import NavBar from './components/NavBar.js'
 import LogIn from './components/LogIn.js'
 import Signup from './components/Signup.js'
 import Member from './components/Member.js'
+import SectionProfile from './components/SectionProfile.js'
 import SectionContainer from './containers/SectionContainer.js'
 
 const requestHelper = url =>
@@ -126,6 +127,43 @@ class App extends Component {
       });
   }
 
+  handleEditSection = (value, id, e) => {
+    console.log("Edit Section", value, id)
+    fetch('http://localhost:3000/api/v1/section' + `/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        title: value.title,
+        duration: value.duration,
+        description: value.description,
+        location: value.location,
+        price: value.price,
+        materials_provided: value.materials_provided,
+        materials_to_bring: value.materials_to_bring,
+        faqs: value.faqs
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("response data", data)
+      let editedSection = this.state.allSections.map(section => {
+        if (section.id === id) {
+          return data
+        } else {
+          return section
+        }
+      })
+      this.setState({
+        allSections: editedSection
+      })
+    })
+    // e.currentTarget.querySelectorAll('input').reset()
+  }
+
   componentDidMount() {
     if (localStorage.getItem("token")) {
       this.fetchMember();
@@ -188,7 +226,7 @@ class App extends Component {
           <Route
             path="/member/:memberId"
             render={props => {
-              console.log("member id props", props);
+              // console.log("member id props", props);
               return(
                 <div className="App">
                   <Member
@@ -202,6 +240,24 @@ class App extends Component {
                   )}
                   />
                 </div>
+              )
+            }}
+          />
+          <Route
+            path="/class/:classId"
+            render={props => {
+              // console.log("class id props", props);
+              return(
+                // <div className="App">
+                  <SectionProfile
+                    currentMember={this.state.member}
+                    handleEditSection={this.handleEditSection}
+                    section={this.state.allSections.find(section => {
+                      return section.id == props.match.params.classId
+                    }
+                  )}
+                  />
+                // </div>
               )
             }}
           />
