@@ -4,9 +4,32 @@
   padding: 50px 0;
 }
 
-.container {
+.member_profile_container {
 	display: grid;
 	grid-template-columns: 2fr 4fr;
+}
+
+.section_profile_container {
+	display: grid;
+	grid-template-columns: 2fr 4fr 2fr;
+}
+
+.home_top_header {
+  height: 400px;
+  background-image: url('https://images.pexels.com/photos/955450/pexels-photo-955450.jpeg');
+  background-position: center;
+  background-size: cover;
+}
+
+.section_profile_topheader {
+  height: 200px;
+  background-image: url('http://images.unsplash.com/photo-1528396518501-b53b655eb9b3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9&s=9637da22b65c3bd041d31ff0fdd3700a');
+  background-position: center;
+  background-size: cover;
+}
+
+.ui.menu {
+	margin: 0;
 }
 
 /* .App-logo {
