@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 
-const NavBar = props => {
+const HomeNavBar = props => {
   // console.log('Nav bar member props', props.member)
 
   return (
-    <div className={`ui menu navbar`}>
+    <div className={`ui inverted secondary pointing menu navbar`}>
       <a className="item">
         <h2 className="ui header">
           <i className={`${props.icon} icon`} />
@@ -48,6 +48,8 @@ const NavBar = props => {
                   <NavLink
                     exact
                     to={`/member/${props.member.id}`}
+                    // className="ui item"
+                    // activeClassName="ui active item"
                   >
                     <i class="id card outline"></i>My profile
                   </NavLink>
@@ -80,4 +82,4 @@ const NavBar = props => {
   );
 };
 
-export default NavBar;
+export default HomeNavBar;

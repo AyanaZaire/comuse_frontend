@@ -1,12 +1,15 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Header } from 'semantic-ui-react'
 import SectionCard from '../components/SectionCard.js'
 
 
 const SectionContainer = ({sections}) => {
     return(
-      <div>
-        <h2>Sections:</h2>
+      <div className='section_container'>
+        <Header as='h2'>
+          Classes
+          <Header.Subheader>Learn that new skill you've been curious about</Header.Subheader>
+        </Header>
         <Card.Group>
       {sections.map(section => {
           return <SectionCard

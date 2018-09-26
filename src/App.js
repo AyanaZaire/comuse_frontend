@@ -3,11 +3,15 @@ import React, { Component } from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 
+import HomeNavBar from './components/HomeNavBar.js'
 import NavBar from './components/NavBar.js'
 import LogIn from './components/LogIn.js'
 import Signup from './components/Signup.js'
 import Member from './components/Member.js'
 import SectionProfile from './components/SectionProfile.js'
+import Search from './components/Search.js'
+import Categories from './components/Categories.js'
+
 import SectionContainer from './containers/SectionContainer.js'
 
 const requestHelper = url =>
@@ -31,7 +35,9 @@ class App extends Component {
   state = {
     member: null,
     allMembers: [],
-    allSections: []
+    allSections: [],
+    searchTerm: "",
+    allCategories: []
   }
 
   fetchMembers = () => {
@@ -77,7 +83,7 @@ class App extends Component {
   }
 
   handleEditMember = (value, id, e) => {
-    // console.log("Edit User", value, id)
+    // console.log("Edit Section", value, id)
     fetch(URL + `/${id}`, {
       method: "PATCH",
       headers: {
@@ -222,38 +228,67 @@ class App extends Component {
     })
   }
 
+  onSearchHandler = event => {
+    this.setState({ searchTerm: event.target.value });
+  }
+
+  filterSection = () => {
+    return this.state.allSections.filter(section => section.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+  }
+
+  sectionComponentLogic = () => {
+    if (this.state.allSections !== null) {
+      let results = this.state.searchTerm === '' ? this.state.allSections : this.filterSection();
+      return <SectionContainer sections={results} />
+    } else {
+      return <SectionContainer sections={this.state.allSections} />
+    }
+  }
+
+  fetchCategories = () => {
+    fetch('http://localhost:3000/api/v1/category')
+      .then(response => response.json())
+      .then(allCategories => {
+        this.setState({ allCategories });
+      });
+  }
+
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.fetchMember();
+      this.fetchMember()
     }
-    this.fetchMembers();
-    this.fetchSections();
+    this.fetchMembers()
+    this.fetchSections()
+    this.fetchCategories()
   }
 
 
   render() {
     console.log('Current app state', this.state)
+    const sectionComponent = this.sectionComponentLogic()
     return (
       <React.Fragment>
-        <NavBar
-          title="Co.muse"
-          icon="lightbulb outline"
-          color="light red"
-          subtitle="Stay Curious"
-          member={this.state.member}
-          handleLogOut={this.handleLogOut}
-        />
+
         <Switch>
           <Route
             exact
             path="/"
             render={() => {
               return(
-                <div className="App">
-                  <SectionContainer
-                    sections={this.state.allSections}
-                  />
-                </div>
+                <React.Fragment>
+                  <div className='home_top_header'>
+                      <HomeNavBar
+                        icon="lightbulb outline"
+                        member={this.state.member}
+                        handleLogOut={this.handleLogOut}
+                      />
+                    <Search  onSearchHandler={this.onSearchHandler} value={this.state.searchTerm}/>
+                  </div>
+                  <div className="App">
+                    <Categories categories={this.state.allCategories}/>
+                    {sectionComponent}
+                  </div>
+                </React.Fragment>
               )
             }}
           />
@@ -261,11 +296,18 @@ class App extends Component {
             path="/login"
             render={() => {
               return(
+                <React.Fragment>
+                <NavBar
+                  icon="lightbulb outline"
+                  member={this.state.member}
+                  handleLogOut={this.handleLogOut}
+                />
                 <div className="App">
                   <LogIn
                     updateMember={this.updateMember}
                   />
                 </div>
+                </React.Fragment>
               )
             }}
           />
@@ -273,11 +315,18 @@ class App extends Component {
             path="/signup"
             render={props => {
               return(
+                <React.Fragment>
+                <NavBar
+                  icon="lightbulb outline"
+                  member={this.state.member}
+                  handleLogOut={this.handleLogOut}
+                />
                 <div className="App">
                   <Signup
                     handleNewMember={this.handleNewMember}
                   />
                 </div>
+                </React.Fragment>
               )
             }}
           />
@@ -286,6 +335,12 @@ class App extends Component {
             render={props => {
               // console.log("member id props", props);
               return(
+                <React.Fragment>
+                <NavBar
+                  icon="lightbulb outline"
+                  member={this.state.member}
+                  handleLogOut={this.handleLogOut}
+                />
                 <div className="App">
                   <Member
                     currentMember={this.state.member}
@@ -299,6 +354,7 @@ class App extends Component {
                   )}
                   />
                 </div>
+                </React.Fragment>
               )
             }}
           />
@@ -307,7 +363,12 @@ class App extends Component {
             render={props => {
               // console.log("class id props", props);
               return(
-                // <div className="App">
+                <React.Fragment>
+                <NavBar
+                  icon="lightbulb outline"
+                  member={this.state.member}
+                  handleLogOut={this.handleLogOut}
+                />
                   <SectionProfile
                     currentMember={this.state.member}
                     handleEditSection={this.handleEditSection}
@@ -317,7 +378,7 @@ class App extends Component {
                     }
                   )}
                   />
-                // </div>
+                </React.Fragment>
               )
             }}
           />
