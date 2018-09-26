@@ -1,12 +1,31 @@
 import React, {Component} from 'react'
 // import { Link } from "react-router-dom";
-import { Icon, Form, Card, Image } from 'semantic-ui-react'
+import { Icon, Form, Card, Image, Divider, Select } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
+
+const options = [
+    { key: 'art', text: 'Arts', value: 1 },
+    { key: 'textile', text: 'Textile', value: 2 },
+    { key: 'music', text: 'Music', value: 3 },
+    { key: 'tech', text: 'Technology', value: 4 },
+    { key: 'design', text: 'Design', value: 5 }
+  ]
 
 class Member extends Component {
 
   state = {
     classesTaken: [],
+    sectionValue: {
+      title:'',
+      duration: '',
+      category_id: null,
+      description: '',
+      location: '',
+      price: null,
+      materials_provided: '',
+      materials_to_bring: '',
+      faqs: ''
+    },
     value: {
       name:'',
       email: '',
@@ -32,6 +51,26 @@ class Member extends Component {
     this.fetchClassesTaken()
     }
 
+  handleSectionFormChange = (e, value) => {
+    // console.log("Section Value", this.state.sectionValue)
+      this.setState({
+        sectionValue: {
+          ...this.state.sectionValue,
+          [e.target.name]: e.target.value
+        }
+      })
+    }
+
+  handleCategoryId = (e, data) => {
+    // console.log("Category Id", data.value)
+    this.setState({
+      sectionValue: {
+        ...this.state.sectionValue,
+        category_id: data.value
+      }
+    })
+  }
+
   handleChange = (e) => {
     this.setState({
       value: {
@@ -43,7 +82,7 @@ class Member extends Component {
 
 
   render() {
-    console.log("Member state", this.state)
+    // console.log("Member state", this.state)
     return this.props.member ? (
       <div className="member_profile_container">
         <div>
@@ -104,7 +143,7 @@ class Member extends Component {
             <React.Fragment>
             <Card.Group>
               {this.state.classesTaken.map(enrolls => {
-                console.log('Enroll map', enrolls)
+                // console.log('Enroll map', enrolls)
                 // return enrolls.section.map(section => {
                 //   console.log('Section map', section)
                   if (this.props.member.id === enrolls.student_id) {
@@ -146,66 +185,93 @@ class Member extends Component {
             <p>From Teachers</p>
 
 
-            {this.props.currentMember && this.props.currentMember.id === this.props.section.teacher.id ? (
+            {/* {const options = [
+              { key: 'art', text: 'Arts', value: 1 },
+              { key: 'textile', text: 'Textile', value: 2 },
+              { key: 'music', text: 'Music', value: 3 },
+              { key: 'tech', text: 'Technology', value: 4 },
+              { key: 'design', text: 'Design', value: 5 }
+            ]} */}
+
+            {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+
               <Form
               onSubmit={ e => {
                 e.preventDefault()
-                this.props.handleEditSection(this.state.value, this.props.section.id, e)
-                this.props.history.push(`/class/${this.props.section.id}`)
+                this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e)
+                this.props.history.push('/')
               }}><h3>Create a New Class:</h3>
               <Form.Group widths='equal'>
                 <Form.Input
                   name='title'
-                  value={this.state.value.title}
-                  onChange={this.handleChange}
+                  value={this.state.sectionValue.title}
+                  onChange={this.handleSectionFormChange}
                   fluid label='Title'
                   placeholder='Title' />
+                <Form.Select
+                  name='category_id'
+                  onChange={(e, data) => this.handleCategoryId(e, data)}
+                  fluid label='Category'
+                  options={options}
+                  placeholder='Category'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
                 <Form.Input
                   name='duration'
-                  value={this.state.value.duration}
-                  onChange={this.handleChange}
+                  value={this.state.sectionValue.duration}
+                  onChange={this.handleSectionFormChange}
                   fluid label='Duration'
                   placeholder='Duration' />
                 <Form.Input
                   name='location'
-                  value={this.state.value.location}
-                  onChange={this.handleChange}
+                  value={this.state.sectionValue.location}
+                  onChange={this.handleSectionFormChange}
                   fluid label='Location'
                   placeholder='Location' />
                 <Form.Input
                   name='price'
-                  value={this.state.value.price}
-                  onChange={this.handleChange}
+                  icon='dollar'
+                  iconPosition='left'
+                  value={this.state.sectionValue.price}
+                  onChange={this.handleSectionFormChange}
                   fluid label='Price'
                   placeholder='Price' />
               </Form.Group>
               <Form.TextArea
                 name='description'
-                value={this.state.value.description}
-                onChange={this.handleChange}
+                value={this.state.sectionValue.description}
+                onChange={this.handleSectionFormChange}
                 label='Description'
                 placeholder='Tell us about the class...' />
 
                 <Form.TextArea
                   name='materials_provided'
-                  value={this.state.value.materials_provided}
-                  onChange={this.handleChange}
+                  value={this.state.sectionValue.materials_provided}
+                  onChange={this.handleSectionFormChange}
                   label='Materials Provided'
                   placeholder='Tell the students what you will provide for the class...' />
 
                   <Form.TextArea
                     name='materials_to_bring'
-                    value={this.state.value.materials_to_bring}
-                    onChange={this.handleChange}
+                    value={this.state.sectionValue.materials_to_bring}
+                    onChange={this.handleSectionFormChange}
                     label='Materials to Bring'
                     placeholder='Tell the students what they should bring to the session...' />
 
+                    <Form.TextArea
+                      name='faqs'
+                      value={this.state.sectionValue.faqs}
+                      onChange={this.handleSectionFormChange}
+                      label='FAQs'
+                      placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
+
               <Form.Checkbox
                 label='I agree to the Terms and Conditions' />
-              <Form.Button>Edit</Form.Button>
+              <Form.Button>Create</Form.Button>
             </Form>
            ) : (null)}
 
+           <Divider />
 
            {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
              <Form
@@ -233,6 +299,8 @@ class Member extends Component {
                  onChange={this.handleChange}
                  fluid label='Password'
                  placeholder='Password' />
+            </Form.Group>
+            <Form.Group widths='equal'>
                <Form.Input
                  name='skill'
                  value={this.state.value.skill}
