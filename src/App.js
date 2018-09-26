@@ -112,6 +112,41 @@ class App extends Component {
     e.currentTarget.reset()
   }
 
+  handleNewSection = (teacher_id, value, e) => {
+    // console.log("Handle New Section", teacher_id, value, e)
+    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs} = value
+    // debugger
+    fetch('http://localhost:3000/api/v1/section', {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({section: {
+        title: title,
+        duration: duration,
+        category_id: category_id,
+        teacher_id: teacher_id,
+        description: description,
+        location: location,
+        price: price,
+        materials_provided: materials_provided,
+        materials_to_bring: materials_to_bring,
+        faqs: faqs
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Response", data)
+      this.setState({
+        allSections: [...this.state.allSections, data]
+      })
+    })
+    // e.currentTarget.reset()
+  }
+
   handleLogOut = (e) => {
     this.setState({
       member: null
@@ -162,6 +197,29 @@ class App extends Component {
       })
     })
     // e.currentTarget.querySelectorAll('input').reset()
+  }
+
+  handleEnrollButton = (e, student_id, section_id) => {
+    console.log("Enroll button", e, student_id, section_id)
+    fetch('http://localhost:3000/api/v1/enrolled', {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        student_id: student_id,
+        section_id: section_id
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Enrolled response", data)
+      // this.setState({
+      //   allSections: [...this.state.allSections, data]
+      // })
+    })
   }
 
   componentDidMount() {
@@ -232,6 +290,7 @@ class App extends Component {
                   <Member
                     currentMember={this.state.member}
                     handleEditMember={this.handleEditMember}
+                    handleNewSection={this.handleNewSection}
                     // member={this.state.member}
                     member={this.state.allMembers.find(member => {
                       // console.log('in find', typeof member.id, typeof props.match.params.memberId);
@@ -252,6 +311,7 @@ class App extends Component {
                   <SectionProfile
                     currentMember={this.state.member}
                     handleEditSection={this.handleEditSection}
+                    handleEnrollButton={this.handleEnrollButton}
                     section={this.state.allSections.find(section => {
                       return section.id == props.match.params.classId
                     }

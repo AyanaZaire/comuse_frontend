@@ -63,8 +63,8 @@ class SectionProfile extends Component {
 
 
   render() {
-    console.log("Section state", this.state)
-    console.log("Props", this.props)
+    // console.log("Section state", this.state)
+    // console.log("Props", this.props)
     return this.props.section ? (
     <React.Fragment>
     <div className='section_profile_topheader'>
@@ -113,7 +113,15 @@ class SectionProfile extends Component {
                 {this.props.currentMember && this.props.currentMember.id === this.props.section.teacher.id ? (
                     <Button color='black' size='mini' floated='right'>Edit</Button>
                   ) : (
-                    <Button color='black' size='mini' floated='right'>Enroll</Button>
+                    <Button
+                      color='black'
+                      size='mini'
+                      floated='right'
+                      onClick={(e) => {
+                        this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section.id)
+                        this.props.history.push(`/member/${this.props.currentMember.id}`)
+                      }}
+                      >Enroll</Button>
                   )}
 
                 </Segment>
@@ -127,9 +135,9 @@ class SectionProfile extends Component {
           <React.Fragment>
           <Card.Group>
             {this.state.teachers.map(member => {
-              console.log('Member map', member)
+              // console.log('Member map', member)
               return member.sections.map(section => {
-                console.log('Section map', section)
+                // console.log('Section map', section)
 
                 if (this.props.section.teacher_id === section.teacher_id) {
                   return <Card
@@ -193,6 +201,8 @@ class SectionProfile extends Component {
                  placeholder='Location' />
                <Form.Input
                  name='price'
+                 icon='dollar'
+                 iconPosition='left'
                  value={this.state.value.price}
                  onChange={this.handleChange}
                  fluid label='Price'
@@ -218,6 +228,13 @@ class SectionProfile extends Component {
                    onChange={this.handleChange}
                    label='Materials to Bring'
                    placeholder='Tell the students what they should bring to the session...' />
+
+                   <Form.TextArea
+                     name='faqs'
+                     value={this.state.value.faqs}
+                     onChange={this.handleChange}
+                     label='FAQs'
+                     placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
 
              <Form.Checkbox
                label='I agree to the Terms and Conditions' />
