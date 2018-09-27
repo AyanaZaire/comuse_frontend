@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // import { Link } from "react-router-dom";
-import { Icon, Form, Card, Image, Divider, Select } from 'semantic-ui-react'
+import { Icon, Form, Card, Image, Divider, Select, Modal, Header, Button } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
 const options = [
@@ -91,7 +91,168 @@ class Member extends Component {
           <div><Icon name='map pin' /> {`${this.props.member.location}`}</div>
           <div><Icon name='globe' /> {`${this.props.member.website}`}</div>
 
+          <br></br>
+
+          {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+          <Modal trigger={<Button secondary>Create New Class</Button>} >
+            <Modal.Header>Create a New Class</Modal.Header>
+            <Modal.Content scrolling>
+              {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
+              <Modal.Description>
+                {/* <Header>Default Profile Image</Header> */}
+                  <Form
+                  onSubmit={ e => {
+                    e.preventDefault()
+                    this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e)
+                    this.props.history.push('/')
+                  }}>
+                  <Form.Group widths='equal'>
+                    <Form.Input
+                      name='title'
+                      value={this.state.sectionValue.title}
+                      onChange={this.handleSectionFormChange}
+                      fluid label='Title'
+                      placeholder='Title' />
+                    <Form.Select
+                      name='category_id'
+                      onChange={(e, data) => this.handleCategoryId(e, data)}
+                      fluid label='Category'
+                      options={options}
+                      placeholder='Category'/>
+                  </Form.Group>
+                  <Form.Group widths='equal'>
+                    <Form.Input
+                      name='duration'
+                      value={this.state.sectionValue.duration}
+                      onChange={this.handleSectionFormChange}
+                      fluid label='Duration'
+                      placeholder='Duration' />
+                    <Form.Input
+                      name='location'
+                      value={this.state.sectionValue.location}
+                      onChange={this.handleSectionFormChange}
+                      fluid label='Location'
+                      placeholder='Location' />
+                    <Form.Input
+                      name='price'
+                      icon='dollar'
+                      iconPosition='left'
+                      value={this.state.sectionValue.price}
+                      onChange={this.handleSectionFormChange}
+                      fluid label='Price'
+                      placeholder='Price' />
+                  </Form.Group>
+                  <Form.TextArea
+                    name='description'
+                    value={this.state.sectionValue.description}
+                    onChange={this.handleSectionFormChange}
+                    label='Description'
+                    placeholder='Tell us about the class...' />
+
+                    <Form.TextArea
+                      name='materials_provided'
+                      value={this.state.sectionValue.materials_provided}
+                      onChange={this.handleSectionFormChange}
+                      label='Materials Provided'
+                      placeholder='Tell the students what you will provide for the class...' />
+
+                      <Form.TextArea
+                        name='materials_to_bring'
+                        value={this.state.sectionValue.materials_to_bring}
+                        onChange={this.handleSectionFormChange}
+                        label='Materials to Bring'
+                        placeholder='Tell the students what they should bring to the session...' />
+
+                        <Form.TextArea
+                          name='faqs'
+                          value={this.state.sectionValue.faqs}
+                          onChange={this.handleSectionFormChange}
+                          label='FAQs'
+                          placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
+
+                  <Form.Checkbox
+                    label='I agree to the Terms and Conditions' />
+                  <Form.Button>Create</Form.Button>
+                </Form>
+
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+          ) : (null)}
+
+          <br></br><br></br>
+
+          {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+          <Modal trigger={<Button secondary>Edit Profile</Button>} >
+            <Modal.Header>Edit User Profile</Modal.Header>
+            <Modal.Content scrolling>
+              {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
+              <Modal.Description>
+                {/* <Header>Default Profile Image</Header> */}
+                <Form
+                onSubmit={ e => {
+                  e.preventDefault()
+                  this.props.handleEditMember(this.state.value, this.props.member.id, e)
+                  this.props.history.push(`/member/${this.props.member.id}`)
+                }}>
+                <Form.Group widths='equal'>
+                  <Form.Input
+                    name='name'
+                    value={this.state.value.name}
+                    onChange={this.handleChange}
+                    fluid label='Name'
+                    placeholder='Name' />
+                  <Form.Input
+                    name='email'
+                    value={this.state.value.email}
+                    onChange={this.handleChange}
+                    fluid label='Email'
+                    placeholder='Email' />
+                  <Form.Input
+                    name='password'
+                    value={this.state.value.password}
+                    onChange={this.handleChange}
+                    fluid label='Password'
+                    placeholder='Password' />
+               </Form.Group>
+               <Form.Group widths='equal'>
+                  <Form.Input
+                    name='skill'
+                    value={this.state.value.skill}
+                    onChange={this.handleChange}
+                    fluid label='Skill'
+                    placeholder='Skill' />
+                  <Form.Input
+                    name='location'
+                    value={this.state.value.location}
+                    onChange={this.handleChange}
+                    fluid label='Location'
+                    placeholder='Location' />
+                  <Form.Input
+                    name='website'
+                    value={this.state.value.website}
+                    onChange={this.handleChange}
+                    fluid label='Website'
+                    placeholder='Website' />
+                </Form.Group>
+                <Form.TextArea
+                  name='bio'
+                  value={this.state.value.bio}
+                  onChange={this.handleChange}
+                  label='Bio'
+                  placeholder='Tell us more about you...' />
+                <Form.Checkbox
+                  label='I agree to the Terms and Conditions' />
+                <Form.Button>Edit</Form.Button>
+              </Form>
+
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+          ) : (null)}
+
         </div>
+
         <div>
           <h3>Bio</h3>
           <div>{`${this.props.member.bio}`}</div>
@@ -193,7 +354,7 @@ class Member extends Component {
               { key: 'design', text: 'Design', value: 5 }
             ]} */}
 
-            {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+            {/* {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
 
               <Form
               onSubmit={ e => {
@@ -330,7 +491,7 @@ class Member extends Component {
                label='I agree to the Terms and Conditions' />
              <Form.Button>Edit</Form.Button>
            </Form>
-         ) : (null)}
+         ) : (null)} */}
            </div>
         {/* <Link to="/" className="ui button">
           Back Home
