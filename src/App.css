@@ -65,6 +65,10 @@
   background-size: cover;
 }
 
+.ui.modal {
+  top: 10%;
+}
+
 .ui.menu {
 	margin: 0;
 }
