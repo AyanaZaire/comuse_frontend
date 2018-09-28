@@ -9,14 +9,16 @@ class SectionCard extends Component {
     return (
         <Card
           onClick={() => this.props.history.push(`/class/${this.props.section.id}`)}>
-          <Image src='https://mistrzwitold.com/wp-content/uploads/2018/02/method-1024x768.jpg' />
+          <Image src={this.props.section.img_url} />
           <Card.Content>
             <Card.Header>{this.props.section.title}</Card.Header>
             <Card.Meta>
               <span className='date'>{this.props.section.category.name}</span>
             </Card.Meta>
             <Card.Description>
-              <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' avatar />
+              <Image
+                style={{width: "30px", height: "30px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${this.props.section.teacher.img_url})`}}
+                avatar />
                 <span>{this.props.section.teacher.name}</span>
             </Card.Description>
           </Card.Content>

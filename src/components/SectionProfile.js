@@ -28,7 +28,8 @@ class SectionProfile extends Component {
       price: '',
       materials_provided: '',
       materials_to_bring: '',
-      faqs: ''
+      faqs: '',
+      img_url: ''
     }
   }
 
@@ -208,6 +209,14 @@ class SectionProfile extends Component {
                       fluid label='Price'
                       placeholder='Price' />
                   </Form.Group>
+                  <Form.Group>
+                    <Form.Input
+                      name='img_url'
+                      value={this.state.value.img_url}
+                      onChange={this.handleChange}
+                      fluid label='Image Url'
+                      placeholder='Include the image url that will be the "profile photo" of your class' />
+                  </Form.Group>
                   <Form.TextArea
                     name='description'
                     value={this.state.value.description}
@@ -252,9 +261,15 @@ class SectionProfile extends Component {
         <div>
           <Header
             as='h3'
-            onClick={() => this.props.history.push(`/member/${this.props.section.teacher.id}`)}>
+            // onClick={() => this.props.history.push(`/member/${this.props.section.teacher.id}`)}
+            >
              {/* <Image src='' size='tiny' circular /> */}
-             <Image circular src='https://react.semantic-ui.com/images/wireframe/square-image.png' /> About {this.props.section.teacher.name}
+             <Image
+               style={{width: "100px", height: "100px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${this.props.section.teacher.img_url})`}}
+             />&nbsp;  <a
+                  style={{color: 'black', textDecoration: 'underline'}}
+                  onClick={() => this.props.history.push(`/member/${this.props.section.teacher.id}`)}>
+                 About {this.props.section.teacher.name}</a>
           </Header>
           <div>{this.props.section.teacher.bio}</div>
         {/* </div>
@@ -352,7 +367,7 @@ class SectionProfile extends Component {
                   return <Card
                     onClick={() => this.props.history.push(`/class/${section.id}`)}
                     >
-                    <Image src='https://mistrzwitold.com/wp-content/uploads/2018/02/method-1024x768.jpg' />
+                    <Image src={section.img_url} />
                     <Card.Content>
                       <Card.Header>{section.title}</Card.Header>
                       {/* <Card.Meta>

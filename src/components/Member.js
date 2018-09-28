@@ -24,7 +24,8 @@ class Member extends Component {
       price: null,
       materials_provided: '',
       materials_to_bring: '',
-      faqs: ''
+      faqs: '',
+      img_url: ''
     },
     value: {
       name:'',
@@ -33,7 +34,8 @@ class Member extends Component {
       skill: '',
       bio: '',
       location: '',
-      website: ''
+      website: '',
+      img_url: ''
     }
   }
 
@@ -83,10 +85,22 @@ class Member extends Component {
 
   render() {
     // console.log("Member state", this.state)
+
     return this.props.member ? (
       <div className="member_profile_container">
         <div>
-          <h1>{this.props.member.name}</h1>
+          <div
+            style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${this.props.member.img_url})`}}
+            >
+            {/* <Image
+              src={this.props.member.img_url}
+            /> */}
+        </div>
+          <Header as='h1'
+            // textAlign='center'
+            >
+            {this.props.member.name}
+          </Header>
           <div><Icon name='lightbulb outline' /> {`${this.props.member.skill}`}</div>
           <div><Icon name='map pin' /> {`${this.props.member.location}`}</div>
           <div><Icon name='globe' /> {`${this.props.member.website}`}</div>
@@ -141,6 +155,14 @@ class Member extends Component {
                       onChange={this.handleSectionFormChange}
                       fluid label='Price'
                       placeholder='Price' />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Input
+                      name='img_url'
+                      value={this.state.sectionValue.img_url}
+                      onChange={this.handleSectionFormChange}
+                      fluid label='Image Url'
+                      placeholder='Include the image url that will be the "profile photo" of your class' />
                   </Form.Group>
                   <Form.TextArea
                     name='description'
@@ -235,6 +257,14 @@ class Member extends Component {
                     fluid label='Website'
                     placeholder='Website' />
                 </Form.Group>
+                <Form.Group>
+                  <Form.Input
+                    name='img_url'
+                    value={this.state.value.img_url}
+                    onChange={this.handleChange}
+                    fluid label='Image Url'
+                    placeholder='Include the image url that will be your profile photo' />
+                </Form.Group>
                 <Form.TextArea
                   name='bio'
                   value={this.state.value.bio}
@@ -269,7 +299,7 @@ class Member extends Component {
                     return <Card
                       onClick={() => this.props.history.push(`/class/${section.id}`)}
                       >
-                      <Image src='https://mistrzwitold.com/wp-content/uploads/2018/02/method-1024x768.jpg' />
+                      <Image src={section.img_url} />
                       <Card.Content>
                         <Card.Header>{section.title}</Card.Header>
                         {/* <Card.Meta>
@@ -311,7 +341,7 @@ class Member extends Component {
                     return <Card
                       onClick={() => this.props.history.push(`/class/${enrolls.section.id}`)}
                       >
-                      <Image src='https://mistrzwitold.com/wp-content/uploads/2018/02/method-1024x768.jpg' />
+                      <Image src={enrolls.section.img_url} />
                       <Card.Content>
                         <Card.Header>{enrolls.section.title}</Card.Header>
                         {/* <Card.Meta>
@@ -346,152 +376,7 @@ class Member extends Component {
             <p>From Teachers</p>
 
 
-            {/* {const options = [
-              { key: 'art', text: 'Arts', value: 1 },
-              { key: 'textile', text: 'Textile', value: 2 },
-              { key: 'music', text: 'Music', value: 3 },
-              { key: 'tech', text: 'Technology', value: 4 },
-              { key: 'design', text: 'Design', value: 5 }
-            ]} */}
 
-            {/* {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-
-              <Form
-              onSubmit={ e => {
-                e.preventDefault()
-                this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e)
-                this.props.history.push('/')
-              }}><h3>Create a New Class:</h3>
-              <Form.Group widths='equal'>
-                <Form.Input
-                  name='title'
-                  value={this.state.sectionValue.title}
-                  onChange={this.handleSectionFormChange}
-                  fluid label='Title'
-                  placeholder='Title' />
-                <Form.Select
-                  name='category_id'
-                  onChange={(e, data) => this.handleCategoryId(e, data)}
-                  fluid label='Category'
-                  options={options}
-                  placeholder='Category'/>
-              </Form.Group>
-              <Form.Group widths='equal'>
-                <Form.Input
-                  name='duration'
-                  value={this.state.sectionValue.duration}
-                  onChange={this.handleSectionFormChange}
-                  fluid label='Duration'
-                  placeholder='Duration' />
-                <Form.Input
-                  name='location'
-                  value={this.state.sectionValue.location}
-                  onChange={this.handleSectionFormChange}
-                  fluid label='Location'
-                  placeholder='Location' />
-                <Form.Input
-                  name='price'
-                  icon='dollar'
-                  iconPosition='left'
-                  value={this.state.sectionValue.price}
-                  onChange={this.handleSectionFormChange}
-                  fluid label='Price'
-                  placeholder='Price' />
-              </Form.Group>
-              <Form.TextArea
-                name='description'
-                value={this.state.sectionValue.description}
-                onChange={this.handleSectionFormChange}
-                label='Description'
-                placeholder='Tell us about the class...' />
-
-                <Form.TextArea
-                  name='materials_provided'
-                  value={this.state.sectionValue.materials_provided}
-                  onChange={this.handleSectionFormChange}
-                  label='Materials Provided'
-                  placeholder='Tell the students what you will provide for the class...' />
-
-                  <Form.TextArea
-                    name='materials_to_bring'
-                    value={this.state.sectionValue.materials_to_bring}
-                    onChange={this.handleSectionFormChange}
-                    label='Materials to Bring'
-                    placeholder='Tell the students what they should bring to the session...' />
-
-                    <Form.TextArea
-                      name='faqs'
-                      value={this.state.sectionValue.faqs}
-                      onChange={this.handleSectionFormChange}
-                      label='FAQs'
-                      placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
-
-              <Form.Checkbox
-                label='I agree to the Terms and Conditions' />
-              <Form.Button>Create</Form.Button>
-            </Form>
-           ) : (null)}
-
-           <Divider />
-
-           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-             <Form
-             onSubmit={ e => {
-               e.preventDefault()
-               this.props.handleEditMember(this.state.value, this.props.member.id, e)
-               this.props.history.push(`/member/${this.props.member.id}`)
-             }}><h3>Edit User Profile:</h3>
-             <Form.Group widths='equal'>
-               <Form.Input
-                 name='name'
-                 value={this.state.value.name}
-                 onChange={this.handleChange}
-                 fluid label='Name'
-                 placeholder='Name' />
-               <Form.Input
-                 name='email'
-                 value={this.state.value.email}
-                 onChange={this.handleChange}
-                 fluid label='Email'
-                 placeholder='Email' />
-               <Form.Input
-                 name='password'
-                 value={this.state.value.password}
-                 onChange={this.handleChange}
-                 fluid label='Password'
-                 placeholder='Password' />
-            </Form.Group>
-            <Form.Group widths='equal'>
-               <Form.Input
-                 name='skill'
-                 value={this.state.value.skill}
-                 onChange={this.handleChange}
-                 fluid label='Skill'
-                 placeholder='Skill' />
-               <Form.Input
-                 name='location'
-                 value={this.state.value.location}
-                 onChange={this.handleChange}
-                 fluid label='Location'
-                 placeholder='Location' />
-               <Form.Input
-                 name='website'
-                 value={this.state.value.website}
-                 onChange={this.handleChange}
-                 fluid label='Website'
-                 placeholder='Website' />
-             </Form.Group>
-             <Form.TextArea
-               name='bio'
-               value={this.state.value.bio}
-               onChange={this.handleChange}
-               label='Bio'
-               placeholder='Tell us more about you...' />
-             <Form.Checkbox
-               label='I agree to the Terms and Conditions' />
-             <Form.Button>Edit</Form.Button>
-           </Form>
-         ) : (null)} */}
            </div>
         {/* <Link to="/" className="ui button">
           Back Home

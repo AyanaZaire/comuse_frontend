@@ -18,9 +18,11 @@ class Categories extends Component {
               return <Card>
                 <Card.Content>
                   <Header as='h3'>
+                    {/* <div
+                      style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${category.img_url})`}}> */}
                     <Image
-                      // circular
-                      src='https://react.semantic-ui.com/images/avatar/large/patrick.png' /> {category.name}
+                      style={{width: "50px", height: "50px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${category.img_url})`}} /> {category.name}
+                    {/* </div> */}
                   </Header>
                 </Card.Content>
               </Card>

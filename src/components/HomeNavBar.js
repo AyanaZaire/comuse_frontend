@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button } from 'semantic-ui-react'
+import { Button, Image } from 'semantic-ui-react'
 
 const HomeNavBar = props => {
   // console.log('Nav bar member props', props.member)
@@ -41,7 +41,11 @@ const HomeNavBar = props => {
         {props.member ? (
           // <span className="ui item">Logged in as: {props.member.name}</span>
           <div class="ui simple dropdown item">
-            Logged in as: {props.member.name} <i class="dropdown icon"></i>
+            <Image
+              style={{width: "30px", height: "30px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", borderStyle: "solid", borderWidth: "1px", backgroundImage: `url(${props.member.img_url})`}}
+            />
+            <span> &nbsp; Logged in as: {props.member.name}</span>
+            <i class="dropdown icon"></i>
             <div class="menu">
               <a class="item">
                 {props.member ? (

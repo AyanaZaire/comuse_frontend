@@ -13,7 +13,8 @@ class SignUp extends Component {
       skill: '',
       bio: '',
       location: '',
-      website: ''
+      website: '',
+      img_url: ''
     }
   }
 
@@ -83,6 +84,14 @@ class SignUp extends Component {
             onChange={this.handleChange}
             fluid label='Website'
             placeholder='Website' />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            name='img_url'
+            value={this.state.value.img_url}
+            onChange={this.handleChange}
+            fluid label='Image Url'
+            placeholder='Include the image url that will your "profile photo"' />
         </Form.Group>
         <Form.TextArea
           name='bio'
