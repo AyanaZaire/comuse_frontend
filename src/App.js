@@ -70,7 +70,8 @@ class App extends Component {
         skill: value.skill,
         location: value.location,
         website: value.website,
-        bio: value.bio
+        bio: value.bio,
+        img_url: value.img_url
       })
     })
     .then(response => response.json())
@@ -98,7 +99,8 @@ class App extends Component {
         skill: value.skill,
         location: value.location,
         website: value.website,
-        bio: value.bio
+        bio: value.bio,
+        img_url: value.img_url
       })
     })
     .then(response => response.json())
@@ -120,7 +122,7 @@ class App extends Component {
 
   handleNewSection = (teacher_id, value, e) => {
     // console.log("Handle New Section", teacher_id, value, e)
-    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs} = value
+    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url} = value
     // debugger
     fetch('http://localhost:3000/api/v1/section', {
       method: "POST",
@@ -139,7 +141,8 @@ class App extends Component {
         price: price,
         materials_provided: materials_provided,
         materials_to_bring: materials_to_bring,
-        faqs: faqs
+        faqs: faqs,
+        img_url: img_url
         }
       })
     })
@@ -185,7 +188,8 @@ class App extends Component {
         price: value.price,
         materials_provided: value.materials_provided,
         materials_to_bring: value.materials_to_bring,
-        faqs: value.faqs
+        faqs: value.faqs,
+        img_url: value.img_url
       })
     })
     .then(response => response.json())
