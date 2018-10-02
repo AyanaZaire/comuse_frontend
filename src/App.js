@@ -12,6 +12,9 @@ import SectionProfile from './components/SectionProfile.js'
 import Search from './components/Search.js'
 import Categories from './components/Categories.js'
 
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import CheckoutForm from './components/CheckoutForm';
+
 import SectionContainer from './containers/SectionContainer.js'
 
 const requestHelper = url =>
@@ -257,6 +260,20 @@ class App extends Component {
       });
   }
 
+  // patchStripeMember = () => {
+  //   fetch('http://localhost:3000/api/v1/oauth/callback' + `/${this.state.member.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Authorization": `Bearer ${localStorage.getItem("token")}`,
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log("STRIPE response data", data)
+  //   })
+  // }
+
   componentDidMount() {
     if (localStorage.getItem("token")) {
       this.fetchMember()
@@ -383,6 +400,21 @@ class App extends Component {
                   )}
                   />
                 </React.Fragment>
+              )
+            }}
+          />
+          <Route
+            path="/stripe"
+            render={props => {
+              return(
+                <StripeProvider apiKey="pk_test_Y74jXJxVrCcqTM2rMslT4mQV">
+                  <div className="App">
+                    <h1>React Stripe Elements Example</h1>
+                    <Elements>
+                      <CheckoutForm />
+                    </Elements>
+                  </div>
+                </StripeProvider>
               )
             }}
           />

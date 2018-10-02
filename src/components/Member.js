@@ -11,6 +11,10 @@ const options = [
     { key: 'design', text: 'Design', value: 5 }
   ]
 
+// const stripeURL = `https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write`
+
+
+
 class Member extends Component {
 
   state = {
@@ -85,6 +89,13 @@ class Member extends Component {
 
   render() {
     // console.log("Member state", this.state)
+    let stripeURL
+    if (this.props.member) {
+      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.member.id}`
+    } else {
+      stripeURL = null
+    }
+
 
     return this.props.member ? (
       <div className="member_profile_container">
@@ -106,6 +117,12 @@ class Member extends Component {
           <div><Icon name='globe' /> {`${this.props.member.website}`}</div>
 
           <br></br>
+
+          {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+          <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+          ) : (null)}
+
+          <br></br><br></br>
 
           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
           <Modal trigger={<Button secondary>Create New Class</Button>} >
