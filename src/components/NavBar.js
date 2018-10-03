@@ -58,6 +58,17 @@ const NavBar = props => {
                 ) : (null)}
               </a>
 
+              <a class="item">
+                {props.member ? (
+                  <NavLink
+                    exact
+                    to={`/stripe`}
+                  >
+                    <i class="dollar"></i>Payments Dashboard
+                  </NavLink>
+                ) : (null)}
+              </a>
+
               {props.member ? (
                   <a
                     class="item"

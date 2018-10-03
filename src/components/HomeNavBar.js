@@ -60,6 +60,17 @@ const HomeNavBar = props => {
                 ) : (null)}
               </a>
 
+              <a class="item">
+                {props.member ? (
+                  <NavLink
+                    exact
+                    to={`/stripe/member/${props.member.id}`}
+                  >
+                    <i class="dollar"></i>Payments Dashboard
+                  </NavLink>
+                ) : (null)}
+              </a>
+
               {props.member ? (
                   <a
                     class="item"

@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import { Icon, Form, Image, Header, Segment, Button, Card, Modal } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import CheckoutForm from './CheckoutForm';
+
 let counter = 1
 let editCounter = 1
 
@@ -337,15 +340,40 @@ class SectionProfile extends Component {
                     </Modal.Content>
                   </Modal>
                   ) : (
-                    <Button
-                      color='black'
-                      size='mini'
-                      floated='right'
-                      onClick={(e) => {
-                        this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section.id)
-                        this.props.history.push(`/member/${this.props.currentMember.id}`)
-                      }}
-                      >Enroll</Button>
+                    // <Button
+                    //   color='black'
+                    //   size='mini'
+                    //   floated='right'
+                    //   onClick={(e) => {
+                    //     this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section.id)
+                    //     this.props.history.push(`/member/${this.props.currentMember.id}`)
+                    //   }}
+                    //   >Enroll</Button>
+                      <Modal trigger={<Button
+                        color='black'
+                        size='mini'
+                        floated='right'
+                        onClick={(e) => {
+                            this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section.id)
+                            // this.props.history.push(`/member/${this.props.currentMember.id}`)
+                          }}>Enroll</Button>}>
+                        <Modal.Header>Purchase Class</Modal.Header>
+                        <Modal.Content image scrolling>
+                          <Image size='medium' src={this.props.section.img_url} wrapped />
+
+                          <Modal.Description>
+                            <Header>{this.props.section.title}</Header>
+                            <StripeProvider apiKey="pk_test_Y74jXJxVrCcqTM2rMslT4mQV">
+                                <Elements>
+                                  <CheckoutForm
+                                    section = {this.props.section}
+                                   />
+                                </Elements>
+                            </StripeProvider>
+
+                          </Modal.Description>
+                        </Modal.Content>
+                      </Modal>
                   )}
 
                 </Segment>
@@ -362,6 +390,8 @@ class SectionProfile extends Component {
               // console.log('Member map', member)
               return member.sections.map(section => {
                 // console.log('Section map', section)
+                let price = parseFloat(section.price)
+                let fixedPrice = price.toFixed(2)
 
                 if (this.props.section.teacher_id === section.teacher_id) {
                   return <Card
@@ -380,7 +410,7 @@ class SectionProfile extends Component {
                     </Card.Content>
                     <Card.Content extra>
                       <span className="right floated">
-                          <Icon name='dollar'/>{section.price} per person
+                          <Icon name='dollar'/>{fixedPrice} per person
                       </span>
                         <a>
                           <Icon name='map pin'/>{section.location}
