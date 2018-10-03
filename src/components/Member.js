@@ -313,6 +313,10 @@ class Member extends Component {
                 // return member.sections.map(section => {
                 //   console.log('Section map', section)
                   if (this.props.member.id === section.teacher_id) {
+
+                    let price = parseFloat(section.price)
+                    let fixedPrice = price.toFixed(2)
+
                     return <Card
                       onClick={() => this.props.history.push(`/class/${section.id}`)}
                       >
@@ -329,7 +333,7 @@ class Member extends Component {
                       </Card.Content>
                       <Card.Content extra>
                         <span className="right floated">
-                            <Icon name='dollar'/>{section.price} per person
+                            <Icon name='dollar'/>{fixedPrice} per person
                         </span>
                           <a>
                             <Icon name='map pin'/>{section.location}
@@ -355,6 +359,9 @@ class Member extends Component {
                 // return enrolls.section.map(section => {
                 //   console.log('Section map', section)
                   if (this.props.member.id === enrolls.student_id) {
+                    let price = parseFloat(enrolls.section.price)
+                    let fixedPrice = price.toFixed(2)
+
                     return <Card
                       onClick={() => this.props.history.push(`/class/${enrolls.section.id}`)}
                       >
@@ -371,7 +378,7 @@ class Member extends Component {
                       </Card.Content>
                       <Card.Content extra>
                         <span className="right floated">
-                            <Icon name='dollar'/>{enrolls.section.price} per person
+                            <Icon name='dollar'/>{fixedPrice} per person
                         </span>
                           <a>
                             <Icon name='map pin'/>{enrolls.section.location}

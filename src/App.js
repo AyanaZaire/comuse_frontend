@@ -13,7 +13,7 @@ import Search from './components/Search.js'
 import Categories from './components/Categories.js'
 
 import {Elements, StripeProvider} from 'react-stripe-elements';
-import CheckoutForm from './components/CheckoutForm';
+import StripeProfile from './components/StripeProfile';
 
 import SectionContainer from './containers/SectionContainer.js'
 
@@ -47,6 +47,7 @@ class App extends Component {
     fetch(URL)
       .then(response => response.json())
       .then(allMembers => {
+        console.log(allMembers)
         this.setState({ allMembers });
       });
   }
@@ -404,17 +405,24 @@ class App extends Component {
             }}
           />
           <Route
-            path="/stripe"
+            exact
+            path="/stripe/member/:memberId"
             render={props => {
               return(
-                <StripeProvider apiKey="pk_test_Y74jXJxVrCcqTM2rMslT4mQV">
-                  <div className="App">
-                    <h1>React Stripe Elements Example</h1>
-                    <Elements>
-                      <CheckoutForm />
-                    </Elements>
-                  </div>
-                </StripeProvider>
+                <React.Fragment>
+                <NavBar
+                  icon="lightbulb outline"
+                  member={this.state.member}
+                  handleLogOut={this.handleLogOut}
+                />
+                <StripeProfile
+                  member={this.state.allMembers.find(member => {
+                    // console.log('in find', typeof member.id, typeof props.match.params.memberId);
+                    return member.id == props.match.params.memberId
+                  }
+                )}
+                />
+                </React.Fragment>
               )
             }}
           />

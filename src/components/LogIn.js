@@ -58,7 +58,7 @@ class LogIn extends Component {
             <input
               placeholder="password"
               name="password"
-              type="text"
+              type="password"
             />
           </Form.Field>
         <Button type='submit'>Login</Button>

@@ -6,6 +6,9 @@ import {withRouter} from 'react-router-dom';
 class SectionCard extends Component {
 
   render() {
+    let price = parseFloat(this.props.section.price)
+    let fixedPrice = price.toFixed(2)
+
     return (
         <Card
           onClick={() => this.props.history.push(`/class/${this.props.section.id}`)}>
@@ -24,7 +27,7 @@ class SectionCard extends Component {
           </Card.Content>
           <Card.Content extra>
             <span className="right floated">
-                <Icon name='dollar'/>{this.props.section.price}
+                <Icon name='dollar'/>{fixedPrice}
             </span>
               <a>
                 <Icon name='map pin'/>{this.props.section.location}
