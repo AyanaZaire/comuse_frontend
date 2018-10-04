@@ -32,12 +32,25 @@
 
 .member_profile_container {
 	display: grid;
-	grid-template-columns: 2fr 4fr;
+	grid-template-columns: 1fr 4fr;
 }
 
 .section_profile_container {
 	display: grid;
 	grid-template-columns: 2fr 4fr 2fr;
+}
+
+.section_info {
+  padding-right: 30px;
+}
+
+.section_desc {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.section_info_card {
+  padding-left: 30px;
 }
 
 .home_top_header {

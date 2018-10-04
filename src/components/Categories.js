@@ -15,21 +15,14 @@ class Categories extends Component {
 
           <Card.Group itemsPerRow={5}>
             {this.props.categories.map(category => {
-              return <Card>
+              return <Card onClick={this.props.onClickCategoryHandler} id={category.name}>
                 <Card.Content>
                   <Header as='h3'>
-                    {/* <div
-                      style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${category.img_url})`}}> */}
                     <Image
-                      style={{width: "50px", height: "50px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${category.img_url})`}} /> {category.name}
-                    {/* </div> */}
+                      style={{width: "50px", height: "50px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${category.img_url})`}} />{category.name}
                   </Header>
                 </Card.Content>
               </Card>
-              // return <Label as='a' image size='massive'>
-              //   <img src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
-              //   {category.name}
-              // </Label>
             })}
           </Card.Group>
         </React.Fragment>

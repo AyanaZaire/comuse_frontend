@@ -158,13 +158,13 @@ class SectionProfile extends Component {
     return this.props.section ? (
     <React.Fragment>
     <div className='section_profile_topheader'>
-      <Button floated='left'>View Photos</Button>
+      {/* <Button floated='left'>View Photos</Button> */}
     </div>
     <div className="App">
       <div className="section_profile_container">
       {/* // <React.Fragment>
       // <Grid.Column width={4}> */}
-        <div>
+        <div className='section_profile'>
           <h1>{this.props.section.title}</h1>
           <div><Icon name='lightbulb outline' /> {`${this.props.section.category.name}`}</div>
           <div><Icon name='map pin' /> {`${this.props.section.location}`}</div>
@@ -212,14 +212,12 @@ class SectionProfile extends Component {
                       fluid label='Price'
                       placeholder='Price' />
                   </Form.Group>
-                  <Form.Group>
                     <Form.Input
                       name='img_url'
                       value={this.state.value.img_url}
                       onChange={this.handleChange}
                       fluid label='Image Url'
                       placeholder='Include the image url that will be the "profile photo" of your class' />
-                  </Form.Group>
                   <Form.TextArea
                     name='description'
                     value={this.state.value.description}
@@ -261,7 +259,7 @@ class SectionProfile extends Component {
         </div>
       {/* </Grid.Column>
       <Grid.Column width={9}> */}
-        <div>
+        <div className='section_desc'>
           <Header
             as='h3'
             // onClick={() => this.props.history.push(`/member/${this.props.section.teacher.id}`)}
@@ -285,8 +283,8 @@ class SectionProfile extends Component {
             <p>{this.props.section.materials_to_bring}</p>
           <h3>FAQs</h3>
             <p>{this.props.section.faqs}</p>
-          <h3>Reviews</h3>
-            <p>From students who took this class</p>
+          {/* <h3>Reviews</h3>
+            <p>From students who took this class</p> */}
           <a id="courses"/>
           <h3>Available Class Times</h3>
           <Segment.Group>
@@ -429,7 +427,7 @@ class SectionProfile extends Component {
 
 
            </div>
-        <div>
+        <div className='section_info_card'>
             <Segment.Group>
               <Segment inverted size='big'><Icon name='dollar' />{this.props.section.price} per person</Segment>
               <Segment>Duration {this.props.section.duration}</Segment>
