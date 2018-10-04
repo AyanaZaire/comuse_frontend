@@ -7,13 +7,13 @@ const HomeNavBar = props => {
 
   return (
     <div className={`ui inverted secondary pointing menu navbar`}>
-      <a className="item">
+      {/* <a className="item">
         <h2 className="ui header">
-          <i className={`${props.icon} icon`} />
+          <i className={`${props.icon} icon`} /> */}
           {/* <div className="content">{props.title}</div>
           <div className="sub header">{props.subtitle}</div> */}
-        </h2>
-      </a>
+        {/* </h2>
+      </a> */}
 
       <NavLink
         exact
@@ -21,7 +21,11 @@ const HomeNavBar = props => {
         className="ui item"
         activeClassName="ui active item"
       >
-        Home
+        <h2 className="ui header">
+          <i className={`${props.icon} icon`} />
+          {/* <div className="content">{props.title}</div>
+          <div className="sub header">{props.subtitle}</div> */}
+        </h2>
       </NavLink>
 
 

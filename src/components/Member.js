@@ -173,14 +173,12 @@ class Member extends Component {
                       fluid label='Price'
                       placeholder='Price' />
                   </Form.Group>
-                  <Form.Group>
                     <Form.Input
                       name='img_url'
                       value={this.state.sectionValue.img_url}
                       onChange={this.handleSectionFormChange}
                       fluid label='Image Url'
                       placeholder='Include the image url that will be the "profile photo" of your class' />
-                  </Form.Group>
                   <Form.TextArea
                     name='description'
                     value={this.state.sectionValue.description}
@@ -274,14 +272,12 @@ class Member extends Component {
                     fluid label='Website'
                     placeholder='Website' />
                 </Form.Group>
-                <Form.Group>
                   <Form.Input
                     name='img_url'
                     value={this.state.value.img_url}
                     onChange={this.handleChange}
                     fluid label='Image Url'
                     placeholder='Include the image url that will be your profile photo' />
-                </Form.Group>
                 <Form.TextArea
                   name='bio'
                   value={this.state.value.bio}
@@ -395,9 +391,9 @@ class Member extends Component {
           </Card.Group>
           </React.Fragment>
 
-          <h3>Reviews</h3>
+          {/* <h3>Reviews</h3>
             <p>From Students</p>
-            <p>From Teachers</p>
+            <p>From Teachers</p> */}
 
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 import HomeNavBar from './components/HomeNavBar.js'
 import NavBar from './components/NavBar.js'
@@ -40,7 +41,8 @@ class App extends Component {
     allMembers: [],
     allSections: [],
     searchTerm: "",
-    allCategories: []
+    allCategories: [],
+    clickedCategory: ""
   }
 
   fetchMembers = () => {
@@ -244,15 +246,6 @@ class App extends Component {
     return this.state.allSections.filter(section => section.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
   }
 
-  sectionComponentLogic = () => {
-    if (this.state.allSections !== null) {
-      let results = this.state.searchTerm === '' ? this.state.allSections : this.filterSection();
-      return <SectionContainer sections={results} />
-    } else {
-      return <SectionContainer sections={this.state.allSections} />
-    }
-  }
-
   fetchCategories = () => {
     fetch('http://localhost:3000/api/v1/category')
       .then(response => response.json())
@@ -261,19 +254,31 @@ class App extends Component {
       });
   }
 
-  // patchStripeMember = () => {
-  //   fetch('http://localhost:3000/api/v1/oauth/callback' + `/${this.state.member.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Authorization": `Bearer ${localStorage.getItem("token")}`,
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log("STRIPE response data", data)
-  //   })
-  // }
+  onClickCategoryHandler = (event) => {
+    let clicked = event.currentTarget.id
+    this.setState({ clickedCategory: clicked });
+  }
+
+  filterCategory = () => {
+    let currentCat = this.state.clickedCategory.toLowerCase()
+    return this.state.allSections.filter(section => section.category.name.toLowerCase() == currentCat)
+  }
+
+  sectionComponentLogic = () => {
+    if (this.state.searchTerm !== '') {
+      let results = this.state.searchTerm === '' ? this.state.allSections : this.filterSection();
+      return <SectionContainer sections={results} />
+    } else if (this.state.clickedCategory !== '') {
+      let results = this.state.clickedCategory === '' ? this.state.allSections : this.filterCategory();
+      return <SectionContainer sections={results} />
+    } else {
+      return <SectionContainer sections={this.state.allSections} />
+    }
+  }
+
+  resetState = () => {
+    this.setState({ clickedCategory: '' });
+  }
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
@@ -288,6 +293,7 @@ class App extends Component {
   render() {
     console.log('Current app state', this.state)
     const sectionComponent = this.sectionComponentLogic()
+    // const categoryComponent = this.categoryComponentLogic()
     return (
       <React.Fragment>
 
@@ -307,8 +313,17 @@ class App extends Component {
                     <Search  onSearchHandler={this.onSearchHandler} value={this.state.searchTerm}/>
                   </div>
                   <div className="App">
-                    <Categories categories={this.state.allCategories}/>
+                    {/* <Categories
+                      categories={this.state.allCategories}
+                      onClickCategoryHandler={this.onClickCategoryHandler}
+                    /> */}
+                    <Categories
+                      categories={this.state.allCategories}
+                      onClickCategoryHandler={this.onClickCategoryHandler}
+                    />
                     {sectionComponent}
+                    <br></br><br></br>
+                    <Button secondary onClick={this.resetState}>All Classes</Button>
                   </div>
                 </React.Fragment>
               )

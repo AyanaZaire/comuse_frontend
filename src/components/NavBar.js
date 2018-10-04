@@ -7,13 +7,13 @@ const NavBar = props => {
 
   return (
     <div className={`ui menu navbar`}>
-      <a className="item">
+      {/* <a className="item">
         <h2 className="ui header">
-          <i className={`${props.icon} icon`} />
+          <i className={`${props.icon} icon`} /> */}
           {/* <div className="content">{props.title}</div>
           <div className="sub header">{props.subtitle}</div> */}
-        </h2>
-      </a>
+        {/* </h2>
+      </a> */}
 
       <NavLink
         exact
@@ -21,7 +21,11 @@ const NavBar = props => {
         className="ui item"
         activeClassName="ui active item"
       >
-        Home
+        <h2 className="ui header">
+          <i className={`${props.icon} icon`} />
+          {/* <div className="content">{props.title}</div>
+          <div className="sub header">{props.subtitle}</div> */}
+        </h2>
       </NavLink>
 
 
@@ -62,7 +66,7 @@ const NavBar = props => {
                 {props.member ? (
                   <NavLink
                     exact
-                    to={`/stripe`}
+                    to={`/stripe/member/${props.member.id}`}
                   >
                     <i class="dollar"></i>Payments Dashboard
                   </NavLink>
