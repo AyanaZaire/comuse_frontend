@@ -38,6 +38,7 @@ class SignUp extends Component {
   // }
 
   render() {
+    console.log('Sign up state', this.state)
     return (
       <div>
       <Form
