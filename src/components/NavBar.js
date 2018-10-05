@@ -51,6 +51,7 @@ const NavBar = props => {
             <span> &nbsp; Logged in as: {props.member.name}</span>
             <i class="dropdown icon"></i>
             <div class="menu">
+
               <a class="item">
                 {props.member ? (
                   <NavLink

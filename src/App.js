@@ -63,6 +63,7 @@ class App extends Component {
   };
 
   handleNewMember = (e, value) => {
+    console.log('New member value', value)
     fetch(URL, {
       method: "POST",
       headers: {
@@ -82,6 +83,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       this.setState({
         allMembers: [...this.state.allMembers, data]
       })
