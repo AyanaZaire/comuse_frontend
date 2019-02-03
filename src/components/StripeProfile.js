@@ -132,7 +132,7 @@ class StripeProfile extends Component {
 
     let stripeURL
     if (this.props.member) {
-      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=http://localhost:3000/api/v1/oauth/callback&state=${this.props.member.id}`
+      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=https://comuse-backend.herokuapp.com/api/v1/oauth/callback&state=${this.props.member.id}`
     } else {
       stripeURL = null
     }
