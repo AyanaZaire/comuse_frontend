@@ -19,7 +19,7 @@ class CheckoutForm extends Component {
     console.log("Fixed price", price)
 
     let {token} = await this.props.stripe.createToken({name: "Name"});
-    let response = await fetch("http://localhost:3000/api/v1/charge", {
+    let response = await fetch("https://comuse-backend.herokuapp.com/api/v1/charge", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

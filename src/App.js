@@ -32,7 +32,7 @@ const requestHelper = url =>
     }
   });
 
-const URL = 'http://localhost:3000/api/v1/members'
+const URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
 
 class App extends Component {
 
@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   fetchMember = () => {
-    requestHelper("http://localhost:3000/api/v1/me").then(this.updateMember);
+    requestHelper("https://comuse-backend.herokuapp.com/api/v1/me").then(this.updateMember);
   };
 
   updateMember = member => {
@@ -132,7 +132,7 @@ class App extends Component {
     // console.log("Handle New Section", teacher_id, value, e)
     const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url} = value
     // debugger
-    fetch('http://localhost:3000/api/v1/section', {
+    fetch('https://comuse-backend.herokuapp.com/api/v1/section', {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -172,7 +172,7 @@ class App extends Component {
   }
 
   fetchSections = () => {
-    fetch('http://localhost:3000/api/v1/section')
+    fetch('https://comuse-backend.herokuapp.com/api/v1/section')
       .then(response => response.json())
       .then(allSections => {
         this.setState({ allSections });
@@ -181,7 +181,7 @@ class App extends Component {
 
   handleEditSection = (value, id, e) => {
     console.log("Edit Section", value, id)
-    fetch('http://localhost:3000/api/v1/section' + `/${id}`, {
+    fetch('https://comuse-backend.herokuapp.com/api/v1/section' + `/${id}`, {
       method: "PATCH",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -219,7 +219,7 @@ class App extends Component {
 
   handleEnrollButton = (e, student_id, section_id) => {
     console.log("Enroll button", e, student_id, section_id)
-    fetch('http://localhost:3000/api/v1/enrolled', {
+    fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -249,7 +249,7 @@ class App extends Component {
   }
 
   fetchCategories = () => {
-    fetch('http://localhost:3000/api/v1/category')
+    fetch('https://comuse-backend.herokuapp.com/api/v1/category')
       .then(response => response.json())
       .then(allCategories => {
         this.setState({ allCategories });

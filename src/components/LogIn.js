@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
-const baseUrl = "http://localhost:3000/api/v1";
+const baseUrl = "https://comuse-backend.herokuapp.com/api/v1";
 
 class LogIn extends Component {
 

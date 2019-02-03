@@ -37,7 +37,7 @@ class SectionProfile extends Component {
   }
 
   fetchCourses = () => {
-    fetch('http://localhost:3000/api/v1/course')
+    fetch('https://comuse-backend.herokuapp.com/api/v1/course')
     .then(res => res.json())
     .then(courses => {
         this.setState({
@@ -47,7 +47,7 @@ class SectionProfile extends Component {
     }
 
   fetchTeachersSections = () => {
-    fetch('http://localhost:3000/api/v1/members')
+    fetch('https://comuse-backend.herokuapp.com/api/v1/members')
     .then(res => res.json())
     .then(members => {
         this.setState({
@@ -82,7 +82,7 @@ class SectionProfile extends Component {
 
     handleNewCourse = (value, e) => {
       console.log("New course", value)
-      fetch('http://localhost:3000/api/v1/course', {
+      fetch('https://comuse-backend.herokuapp.com/api/v1/course', {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
