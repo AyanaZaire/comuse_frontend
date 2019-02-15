@@ -338,19 +338,8 @@ class SectionProfile extends Component {
                     </Modal.Content>
                   </Modal>
                   ) : (
-                    // <Button
-                    //   color='black'
-                    //   size='mini'
-                    //   floated='right'
-                    //   onClick={(e) => {
-                    //     this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section.id)
-                    //     this.props.history.push(`/member/${this.props.currentMember.id}`)
-                    //   }}
-                    //   >Enroll</Button>
-
                     //handling max_student validation in handleEnrollButton function
-                      {this.props.section.enrolled.length >= course.student_max} ? (<Button>Class is full!</Button>) : (
-                      <Modal trigger={<Button
+                      this.props.section.enrolled.length >= course.student_max ? <Button>Class is full!</Button> : <Modal trigger={<Button
                         color='black'
                         size='mini'
                         floated='right'
@@ -375,8 +364,7 @@ class SectionProfile extends Component {
 
                           </Modal.Description>
                         </Modal.Content>
-                      </Modal>)
-                  )}
+                      </Modal>)}
 
                 </Segment>
               } else {
