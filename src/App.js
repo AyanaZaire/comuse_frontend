@@ -219,8 +219,8 @@ class App extends Component {
 
   handleEnrollButton = (e, student_id, section, course) => {
     console.log("Enroll button", student_id, section, course, section.enrolled.length, course.student_max)
-
-    if(section.enrolled.length === course.student_max) {
+    console.log(section.enrolled.length >= course.student_max)
+    if(section.enrolled.length >= course.student_max) {
       alert('This class is full!')
     } else {
       fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
