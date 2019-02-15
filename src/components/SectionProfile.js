@@ -347,7 +347,7 @@ class SectionProfile extends Component {
                               this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section, course)
                             }
                             // this.props.history.push(`/member/${this.props.currentMember.id}`)
-                          }}>Enroll</Button>}>
+                          }>Enroll</Button>}>
                         <Modal.Header>Purchase Class</Modal.Header>
                         <Modal.Content image scrolling>
                           <Image size='medium' src={this.props.section.img_url} wrapped />
