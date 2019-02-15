@@ -218,29 +218,31 @@ class App extends Component {
   }
 
   handleEnrollButton = (e, student_id, section, course) => {
-    console.log("Enroll button", student_id, section, course)
+    console.log("Enroll button", student_id, section, course, section.enrolled.length, course.student_max)
 
-    
-
-    fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        student_id: student_id,
-        section_id: section.id
+    if(section.enrolled.length === course.student_max) {
+      alert('This class is full!')
+    } else {
+      fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          student_id: student_id,
+          section_id: section.id
+        })
       })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Enrolled response", data)
-      // this.setState({
-      //   allSections: [...this.state.allSections, data]
-      // })
-    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Enrolled response", data)
+        // this.setState({
+        //   allSections: [...this.state.allSections, data]
+        // })
+      })
+    }
   }
 
   onSearchHandler = event => {
