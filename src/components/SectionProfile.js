@@ -349,12 +349,13 @@ class SectionProfile extends Component {
                     //   >Enroll</Button>
 
                     //handling max_student validation in handleEnrollButton function
-                      <Modal trigger={<Button
+                      <Modal trigger={{this.props.section.enrolled.length >= course.student_max} ? 'Class is Full!' : <Button
                         color='black'
                         size='mini'
                         floated='right'
                         onClick={(e) => {
-                            this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section, course)
+                              this.props.handleEnrollButton(e, this.props.currentMember.id, this.props.section, course)
+                            }
                             // this.props.history.push(`/member/${this.props.currentMember.id}`)
                           }}>Enroll</Button>}>
                         <Modal.Header>Purchase Class</Modal.Header>
