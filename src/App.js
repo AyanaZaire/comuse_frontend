@@ -217,8 +217,11 @@ class App extends Component {
     // e.currentTarget.querySelectorAll('input').reset()
   }
 
-  handleEnrollButton = (e, student_id, section) => {
-    console.log("Enroll button", e, student_id, section)
+  handleEnrollButton = (e, student_id, section, course) => {
+    console.log("Enroll button", student_id, section, course)
+
+    
+
     fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
       method: "POST",
       headers: {
