@@ -11,9 +11,13 @@ const options = [
     { key: 'design', text: 'Design', value: 5 }
   ]
 
+const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
+
+// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+// const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
+
 // const stripeURL = `https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write`
-
-
 
 class Member extends Component {
 
@@ -44,7 +48,7 @@ class Member extends Component {
   }
 
   fetchClassesTaken = () => {
-    fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled')
+    fetch(ENROLLED_URL)
     .then(res => res.json())
     .then(sections => {
         this.setState({
@@ -91,7 +95,7 @@ class Member extends Component {
     // console.log("Member state", this.state)
     let stripeURL
     if (this.props.member) {
-      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=https://comuse-backend.herokuapp.com/api/v1/oauth/callback&state=${this.props.member.id}`
+      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=` + REDIRECT_URI_URL + `/api/v1/oauth/callback&state=${this.props.member.id}`
     } else {
       stripeURL = null
     }

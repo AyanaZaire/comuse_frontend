@@ -18,6 +18,21 @@ import StripeProfile from './components/StripeProfile';
 
 import SectionContainer from './containers/SectionContainer.js'
 
+const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
+const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
+const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+
+// const ME_URL = 'http://localhost:3000/api/v1/me'
+// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+// const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
+// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+// const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
+//npm run dev to run local version of frontend application
+
+//other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js
+
 const requestHelper = url =>
   fetch(url, {
     method: "GET",
@@ -32,8 +47,6 @@ const requestHelper = url =>
     }
   });
 
-const URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
-
 class App extends Component {
 
   state = {
@@ -46,7 +59,7 @@ class App extends Component {
   }
 
   fetchMembers = () => {
-    fetch(URL)
+    fetch(MEMBERS_URL)
       .then(response => response.json())
       .then(allMembers => {
         console.log(allMembers)
@@ -55,7 +68,7 @@ class App extends Component {
   }
 
   fetchMember = () => {
-    requestHelper("https://comuse-backend.herokuapp.com/api/v1/me").then(this.updateMember);
+    requestHelper(ME_URL).then(this.updateMember);
   };
 
   updateMember = member => {
@@ -93,7 +106,7 @@ class App extends Component {
 
   handleEditMember = (value, id, e) => {
     // console.log("Edit Section", value, id)
-    fetch(URL + `/${id}`, {
+    fetch(MEMBERS_URL + `/${id}`, {
       method: "PATCH",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -132,7 +145,7 @@ class App extends Component {
     // console.log("Handle New Section", teacher_id, value, e)
     const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url} = value
     // debugger
-    fetch('https://comuse-backend.herokuapp.com/api/v1/section', {
+    fetch(SECTIONS_URL, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -172,7 +185,7 @@ class App extends Component {
   }
 
   fetchSections = () => {
-    fetch('https://comuse-backend.herokuapp.com/api/v1/section')
+    fetch(SECTIONS_URL)
       .then(response => response.json())
       .then(allSections => {
         this.setState({ allSections });
@@ -181,7 +194,7 @@ class App extends Component {
 
   handleEditSection = (value, id, e) => {
     console.log("Edit Section", value, id)
-    fetch('https://comuse-backend.herokuapp.com/api/v1/section' + `/${id}`, {
+    fetch(SECTIONS_URL + `/${id}`, {
       method: "PATCH",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -218,12 +231,12 @@ class App extends Component {
   }
 
   handleEnrollButton = (e, student_id, section, course) => {
-    // console.log("Enroll button", student_id, section, course, section.enrolled.length, course.student_max)
-    // console.log(section.enrolled.length >= course.student_max)
+    console.log("Enroll button", student_id, section, course, section.enrolled.length, course.student_max)
+    console.log(section.enrolled.length >= course.student_max)
     // if(section.enrolled.length >= course.student_max) {
     //   alert('This class is full!')
     // } else {
-      fetch('https://comuse-backend.herokuapp.com/api/v1/enrolled', {
+      fetch(ENROLLED_URL, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -253,7 +266,7 @@ class App extends Component {
   }
 
   fetchCategories = () => {
-    fetch('https://comuse-backend.herokuapp.com/api/v1/category')
+    fetch(CATEGORIES_URL)
       .then(response => response.json())
       .then(allCategories => {
         this.setState({ allCategories });

@@ -5,6 +5,12 @@ import {withRouter} from 'react-router-dom';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
 
+const COURSES_URL = 'https://comuse-backend.herokuapp.com/api/v1/course'
+const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+
+// const COURSES_URL = 'http://localhost:3000/api/v1/course'
+// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+
 let counter = 1
 let editCounter = 1
 
@@ -37,7 +43,7 @@ class SectionProfile extends Component {
   }
 
   fetchCourses = () => {
-    fetch('https://comuse-backend.herokuapp.com/api/v1/course')
+    fetch(COURSES_URL)
     .then(res => res.json())
     .then(courses => {
         this.setState({
@@ -47,7 +53,7 @@ class SectionProfile extends Component {
     }
 
   fetchTeachersSections = () => {
-    fetch('https://comuse-backend.herokuapp.com/api/v1/members')
+    fetch(MEMBERS_URL)
     .then(res => res.json())
     .then(members => {
         this.setState({
@@ -82,7 +88,7 @@ class SectionProfile extends Component {
 
     handleNewCourse = (value, e) => {
       console.log("New course", value)
-      fetch('https://comuse-backend.herokuapp.com/api/v1/course', {
+      fetch(COURSES_URL, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,

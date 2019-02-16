@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
-const baseUrl = "https://comuse-backend.herokuapp.com/api/v1";
+const BASE_URL = "https://comuse-backend.herokuapp.com/api/v1";
+// const BASE_URL = "http://localhost:3000/api/v1";
 
 class LogIn extends Component {
 
@@ -17,7 +18,7 @@ class LogIn extends Component {
 
     // debugger
 
-    fetch(baseUrl + "/login", {
+    fetch(BASE_URL + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

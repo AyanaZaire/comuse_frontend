@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
+const CHARGE_URL = "https://comuse-backend.herokuapp.com/api/v1/charge"
+
+// const CHARGE_URL = "http://localhost:3000/api/v1/charge"
+
 class CheckoutForm extends Component {
   constructor(props) {
     console.log("Checkout Form Props", props.section.price)
@@ -19,7 +23,7 @@ class CheckoutForm extends Component {
     console.log("Fixed price", price)
 
     let {token} = await this.props.stripe.createToken({name: "Name"});
-    let response = await fetch("https://comuse-backend.herokuapp.com/api/v1/charge", {
+    let response = await fetch(CHARGE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
