@@ -29,7 +29,7 @@ const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
 // const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
 // const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
 // const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
-//npm run dev to run local version of frontend application
+// npm run dev to run local version of frontend application
 
 //other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js
 
@@ -77,7 +77,7 @@ class App extends Component {
 
   handleNewMember = (e, value) => {
     console.log('New member value', value)
-    fetch(URL, {
+    fetch(MEMBERS_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
