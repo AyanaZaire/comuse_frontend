@@ -245,7 +245,8 @@ class App extends Component {
         },
         body: JSON.stringify({
           student_id: student_id,
-          section_id: section.id
+          section_id: section.id,
+          course_id: course.id
         })
       })
       .then(response => response.json())
