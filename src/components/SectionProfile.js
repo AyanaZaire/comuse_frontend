@@ -5,11 +5,11 @@ import {withRouter} from 'react-router-dom';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
 
-const COURSES_URL = 'https://comuse-backend.herokuapp.com/api/v1/course'
-const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+// const COURSES_URL = 'https://comuse-backend.herokuapp.com/api/v1/course'
+// const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
 
-// const COURSES_URL = 'http://localhost:3000/api/v1/course'
-// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+const COURSES_URL = 'http://localhost:3000/api/v1/course'
+const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
 
 let counter = 1
 let editCounter = 1

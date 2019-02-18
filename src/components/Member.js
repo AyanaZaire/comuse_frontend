@@ -11,13 +11,13 @@ const options = [
     { key: 'design', text: 'Design', value: 5 }
   ]
 
-const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
-const HOST_URL = 'https://comuse-backend.herokuapp.com'
+// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+// const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
+// const HOST_URL = 'https://comuse-backend.herokuapp.com'
 
-// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-// const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
-// const HOST_URL = 'http://localhost:3000'
+const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
+const HOST_URL = 'http://localhost:3000'
 
 // const stripeURL = `https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write`
 
@@ -38,17 +38,35 @@ class Member extends Component {
       img_url: ''
     },
     value: {
-      name:'',
+      name: '',
       email: '',
       password: '',
       skill: '',
       bio: '',
       location: '',
       website: '',
-      img_url: '',
+      // img_url: '',
       img_upload: null
     }
   }
+
+  // componentDidMount = () => {
+  //   this.props.member ? (
+  //     this.setState({
+  //       value: {
+  //         name: this.props.member.name,
+  //         email: '',
+  //         password: '',
+  //         skill: '',
+  //         bio: '',
+  //         location: '',
+  //         website: '',
+  //         // img_url: '',
+  //         img_upload: null
+  //       }
+  //     })
+  //   ) : null
+  // }
 
   fetchClassesTaken = () => {
     fetch(ENROLLED_URL)
@@ -101,6 +119,15 @@ class Member extends Component {
       }
     })
   }
+
+  // handleSectionFile = (e) => {
+  //   this.setState({
+  //     sectionValue: {
+  //       ...this.state.sectionValue,
+  //       img_upload: e.currentTarget.files[0]
+  //     }
+  //   })
+  // }
 
 
   render() {
@@ -292,12 +319,6 @@ class Member extends Component {
                     fluid label='Website'
                     placeholder='Website' />
                 </Form.Group>
-                  <Form.Input
-                    name='img_url'
-                    value={this.state.value.img_url}
-                    onChange={this.handleChange}
-                    fluid label='Image Url'
-                    placeholder='Include the image url that will be your profile photo' />
                     <Form.Input
                       name='img_upload'
                       type= 'file'

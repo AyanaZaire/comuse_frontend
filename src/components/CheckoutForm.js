@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
-const CHARGE_URL = "https://comuse-backend.herokuapp.com/api/v1/charge"
-
-// const CHARGE_URL = "http://localhost:3000/api/v1/charge"
+// const CHARGE_URL = "https://comuse-backend.herokuapp.com/api/v1/charge"
+const CHARGE_URL = "http://localhost:3000/api/v1/charge"
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -30,6 +29,7 @@ class CheckoutForm extends Component {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({charges: {
+          donation: 100,
           stripeToken: token.id,
           amount: price,
           description: this.props.section.title,

@@ -18,17 +18,17 @@ import StripeProfile from './components/StripeProfile';
 
 import SectionContainer from './containers/SectionContainer.js'
 
-const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
-const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
-const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
-const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+// const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
+// const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+// const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
+// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+// const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
 
-// const ME_URL = 'http://localhost:3000/api/v1/me'
-// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
-// const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
-// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-// const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
+const ME_URL = 'http://localhost:3000/api/v1/me'
+const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
+const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
 // npm run dev to run local version of frontend application
 
 //other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js, NavBar.js, HomeNavBar.js
@@ -84,7 +84,7 @@ class App extends Component {
     formData.append('location', value.location)
     formData.append('website', value.website)
     formData.append('bio', value.bio)
-    formData.append('img_url', value.img_url)
+    // formData.append('img_url', value.img_url)
     formData.append('photo', value.img_upload)
     fetch(MEMBERS_URL, {
       method: "POST",
@@ -126,15 +126,15 @@ class App extends Component {
     formData.append('location', value.location)
     formData.append('website', value.website)
     formData.append('bio', value.bio)
-    formData.append('img_url', value.img_url)
+    // formData.append('img_url', value.img_url)
     formData.append('photo', value.img_upload)
     fetch(MEMBERS_URL + `/${id}`, {
       method: "PATCH",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
+      // headers: {
+      //   "Authorization": `Bearer ${localStorage.getItem("token")}`
+      //   // "Content-Type": "application/json",
+      //   // "Accept": "application/json"
+      // },
       body: formData
       // body: JSON.stringify({
       //   name: value.name,
