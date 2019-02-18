@@ -18,17 +18,17 @@ import StripeProfile from './components/StripeProfile';
 
 import SectionContainer from './containers/SectionContainer.js'
 
-// const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
-// const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
-// const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
-// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-// const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
+const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
+const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
 
-const ME_URL = 'http://localhost:3000/api/v1/me'
-const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
-const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
-const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
+// const ME_URL = 'http://localhost:3000/api/v1/me'
+// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+// const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
+// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+// const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
 // npm run dev to run local version of frontend application
 
 //other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js, NavBar.js, HomeNavBar.js

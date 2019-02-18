@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Image } from 'semantic-ui-react'
 
-// const HOST_URL = 'https://comuse-backend.herokuapp.com'
-const HOST_URL = 'http://localhost:3000'
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
+// const HOST_URL = 'http://localhost:3000'
 
 const HomeNavBar = props => {
   props.member_obj ? console.log(props.member_obj) : null
