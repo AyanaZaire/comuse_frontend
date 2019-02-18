@@ -13,7 +13,7 @@ const options = [
 
 const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
 const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
-const HOST_URL = 'https://comuse-backend.herokuapp.com'
+const HOST_URL = 'https://comuse-backend.herokuapp.com/rails'
 
 // const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
 // const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
