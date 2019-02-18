@@ -13,9 +13,11 @@ const options = [
 
 const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
 const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
 
 // const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
 // const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
+// const HOST_URL = 'http://localhost:3000'
 
 // const stripeURL = `https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write`
 
@@ -92,6 +94,8 @@ class Member extends Component {
 
 
   render() {
+    // const UPLOADED_PHOTO = HOST_URL + `${this.props.member.photo_url}`
+    // this.props.member ? console.log(UPLOADED_PHOTO) : null
     // console.log("Member state", this.state)
     let stripeURL
     if (this.props.member) {
@@ -104,8 +108,9 @@ class Member extends Component {
     return this.props.member ? (
       <div className="member_profile_container">
         <div>
+
           <div
-            style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${this.props.member.img_url})`}}
+            style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${HOST_URL + this.props.member.photo_url})`}}
             >
             {/* <Image
               src={this.props.member.img_url}

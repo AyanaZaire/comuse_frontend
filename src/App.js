@@ -31,7 +31,7 @@ const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
 // const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
 // npm run dev to run local version of frontend application
 
-//other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js
+//other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js, NavBar.js, HomeNavBar.js
 
 const requestHelper = url =>
   fetch(url, {
@@ -75,24 +75,37 @@ class App extends Component {
     this.setState({ member });
   };
 
-  handleNewMember = (e, value) => {
+  handleNewMember = (e, value, formData) => {
     console.log('New member value', value)
+    formData.append('name', value.name)
+    formData.append('email', value.email)
+    formData.append('password', value.password)
+    formData.append('skill', value.skill)
+    formData.append('location', value.location)
+    formData.append('website', value.website)
+    formData.append('bio', value.bio)
+    formData.append('img_url', value.img_url)
+    formData.append('photo', value.img_upload)
     fetch(MEMBERS_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        name: value.name,
-        email: value.email,
-        password: value.password,
-        skill: value.skill,
-        location: value.location,
-        website: value.website,
-        bio: value.bio,
-        img_url: value.img_url
-      })
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Accept": "application/json"
+      // },
+      body: formData
+      // body: JSON.stringify({
+      //   name: value.name,
+      //   email: value.email,
+      //   password: value.password,
+      //   skill: value.skill,
+      //   location: value.location,
+      //   website: value.website,
+      //   bio: value.bio,
+      //   img_url: value.img_url,
+      //   photo: formData,
+      //   contentType: false,
+      //   processData: false
+      // })
     })
     .then(response => response.json())
     .then(data => {
@@ -321,13 +334,18 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => {
+            render={(props) => {
               return(
                 <React.Fragment>
                   <div className='home_top_header'>
                       <HomeNavBar
                         icon="lightbulb outline"
                         member={this.state.member}
+                      //   member_obj={this.state.allMembers.find(member => {
+                      //     // console.log('in find', typeof member.id, typeof props.match.params.memberId);
+                      //     return member.id == this.state.member.id
+                      //   }
+                      // )}
                         handleLogOut={this.handleLogOut}
                       />
                     <Search  onSearchHandler={this.onSearchHandler} value={this.state.searchTerm}/>
@@ -395,7 +413,11 @@ class App extends Component {
                 <React.Fragment>
                 <NavBar
                   icon="lightbulb outline"
-                  member={this.state.member}
+                  member={this.state.allMembers.find(member => {
+                    // console.log('in find', typeof member.id, typeof props.match.params.memberId);
+                    return member.id == props.match.params.memberId
+                  }
+                )}
                   handleLogOut={this.handleLogOut}
                 />
                 <div className="App">

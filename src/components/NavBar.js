@@ -2,8 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Image } from 'semantic-ui-react'
 
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
+// const HOST_URL = 'http://localhost:3000'
+
 const NavBar = props => {
-  // console.log('Nav bar member props', props.member)
+  // props.member ? console.log(HOST_URL + `${props.member.photo_url}`) : null
 
   return (
     <div className={`ui menu navbar`}>
@@ -46,7 +49,7 @@ const NavBar = props => {
           // <span className="ui item">Logged in as: {props.member.name}</span>
           <div class="ui simple dropdown item">
             <Image
-              style={{width: "30px", height: "30px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", borderStyle: "solid", borderWidth: "1px", backgroundImage: `url(${props.member.img_url})`}}
+              style={{width: "30px", height: "30px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", borderStyle: "solid", borderWidth: "1px", backgroundImage: `url(${HOST_URL + props.member.photo_url})`}}
             />
             <span> &nbsp; Logged in as: {props.member.name}</span>
             <i class="dropdown icon"></i>

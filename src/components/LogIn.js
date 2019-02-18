@@ -27,11 +27,12 @@ class LogIn extends Component {
       body: data
     })
       .then(res => {
-        if (res.status === 401) {
-          alert("login failed");
-        } else {
+        // if (res.status === 401) {
+        //   alert("login failed");
+        // } else {
+          // debugger
           return res.json()
-        }
+        // }
       })
       .then(json => {
         this.props.updateMember(json.member);

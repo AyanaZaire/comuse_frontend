@@ -14,7 +14,8 @@ class SignUp extends Component {
       bio: '',
       location: '',
       website: '',
-      img_url: ''
+      img_url: '',
+      img_upload: null
     }
   }
 
@@ -23,6 +24,15 @@ class SignUp extends Component {
       value: {
         ...this.state.value,
         [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  handleFile = (e) => {
+    this.setState({
+      value: {
+        ...this.state.value,
+        img_upload: e.currentTarget.files[0]
       }
     })
   }
@@ -44,7 +54,8 @@ class SignUp extends Component {
       <Form
         onSubmit={ e => {
           e.preventDefault()
-          this.props.handleNewMember(e, this.state.value)
+          const formData = new FormData()
+          this.props.handleNewMember(e, this.state.value, formData)
           this.props.history.push('/')
         }}
         ><h3>Create An Account</h3>
@@ -86,11 +97,18 @@ class SignUp extends Component {
             fluid label='Website'
             placeholder='Website' />
         </Form.Group>
+        <Form.Input
+          name='img_url'
+          value={this.state.value.img_url}
+          onChange={this.handleChange}
+          fluid label='Image Url'
+          placeholder='Include the image url that will be your "profile photo"' />
           <Form.Input
-            name='img_url'
-            value={this.state.value.img_url}
-            onChange={this.handleChange}
-            fluid label='Image Url'
+            name='img_upload'
+            type= 'file'
+            // value={this.state.value.img_url}
+            onChange={this.handleFile}
+            fluid label='Upload Your Profile Photo'
             placeholder='Include the image url that will be your "profile photo"' />
         <Form.TextArea
           name='bio'
