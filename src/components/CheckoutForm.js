@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
 const options = [
-    { key: '10', text: '10%', value: 0.10 },
-    { key: '15', text: '15%', value: 0.15 },
-    { key: '20', text: '20%', value: 0.20 }
+    { key: '10', text: '10%', value: 10 },
+    { key: '15', text: '15%', value: 15 },
+    { key: '20', text: '20%', value: 20 }
     // { key: 'other', text: 'Other', value: '' }
   ]
 
@@ -36,7 +36,7 @@ class CheckoutForm extends Component {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({charges: {
-          donation_percentage: 0.10,
+          donation_percentage: 10,
           stripeToken: token.id,
           amount: price,
           description: this.props.section.title,
