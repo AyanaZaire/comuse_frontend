@@ -117,8 +117,17 @@ class App extends Component {
     e.currentTarget.reset()
   }
 
-  handleEditMember = (value, id, e) => {
+  handleEditMember = (value, id, e, formData) => {
     // console.log("Edit Section", value, id)
+    formData.append('name', value.name)
+    formData.append('email', value.email)
+    formData.append('password', value.password)
+    formData.append('skill', value.skill)
+    formData.append('location', value.location)
+    formData.append('website', value.website)
+    formData.append('bio', value.bio)
+    formData.append('img_url', value.img_url)
+    formData.append('photo', value.img_upload)
     fetch(MEMBERS_URL + `/${id}`, {
       method: "PATCH",
       headers: {
@@ -126,20 +135,21 @@ class App extends Component {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify({
-        name: value.name,
-        email: value.email,
-        password: value.password,
-        skill: value.skill,
-        location: value.location,
-        website: value.website,
-        bio: value.bio,
-        img_url: value.img_url
-      })
+      body: formData
+      // body: JSON.stringify({
+      //   name: value.name,
+      //   email: value.email,
+      //   password: value.password,
+      //   skill: value.skill,
+      //   location: value.location,
+      //   website: value.website,
+      //   bio: value.bio,
+      //   img_url: value.img_url
+      // })
     })
     .then(response => response.json())
     .then(data => {
-      // console.log("response data", data)
+      console.log("response data", data)
       let editedMember = this.state.allMembers.map(member => {
         if (member.id === id) {
           return data

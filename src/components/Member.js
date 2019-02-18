@@ -45,7 +45,8 @@ class Member extends Component {
       bio: '',
       location: '',
       website: '',
-      img_url: ''
+      img_url: '',
+      img_upload: null
     }
   }
 
@@ -88,6 +89,15 @@ class Member extends Component {
       value: {
         ...this.state.value,
         [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  handleFile = (e) => {
+    this.setState({
+      value: {
+        ...this.state.value,
+        img_upload: e.currentTarget.files[0]
       }
     })
   }
@@ -238,7 +248,8 @@ class Member extends Component {
                 <Form
                 onSubmit={ e => {
                   e.preventDefault()
-                  this.props.handleEditMember(this.state.value, this.props.member.id, e)
+                  const formData = new FormData()
+                  this.props.handleEditMember(this.state.value, this.props.member.id, e, formData)
                   this.props.history.push(`/member/${this.props.member.id}`)
                 }}>
                 <Form.Group widths='equal'>
@@ -281,12 +292,19 @@ class Member extends Component {
                     fluid label='Website'
                     placeholder='Website' />
                 </Form.Group>
-                  <Form.Input
-                    name='img_url'
-                    value={this.state.value.img_url}
-                    onChange={this.handleChange}
-                    fluid label='Image Url'
-                    placeholder='Include the image url that will be your profile photo' />
+                  // <Form.Input
+                  //   name='img_url'
+                  //   value={this.state.value.img_url}
+                  //   onChange={this.handleChange}
+                  //   fluid label='Image Url'
+                  //   placeholder='Include the image url that will be your profile photo' />
+                    <Form.Input
+                      name='img_upload'
+                      type= 'file'
+                      // value={this.state.value.img_url}
+                      onChange={this.handleFile}
+                      fluid label='Upload Your Profile Photo'
+                      placeholder='Include the image url that will be your "profile photo"' />
                 <Form.TextArea
                   name='bio'
                   value={this.state.value.bio}
