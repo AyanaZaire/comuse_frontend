@@ -61,19 +61,6 @@ class CheckoutForm extends Component {
         <h1>Purchase Complete — View Your Enrolled Classes</h1>
       ) : (
         <div className="checkout">
-        // <Form
-        // onSubmit={ e => {
-        //   e.preventDefault()
-        //   // this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e)
-        //   // this.props.history.push('/')
-        // }}>
-        // <Form.Group widths='equal'>
-        // <Form.Select
-        //   name='category_id'
-        //   onChange={(e, data) => this.handleCategoryId(e, data)}
-        //   fluid label='Category'
-        //   options={options}
-        //   placeholder='Category'/>
           <p>Would you like to complete the purchase?</p>
           <CardElement />
           <button onClick={this.submit}>Purchase Class</button>
