@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+import { Form } from 'semantic-ui-react'
+
 
 const options = [
     { key: '10', text: '10%', value: 10 },
@@ -15,7 +17,7 @@ class CheckoutForm extends Component {
   constructor(props) {
     console.log("Checkout Form Props", props.section.price)
     super(props);
-    this.state = {complete: false};
+    this.state = {complete: false, donationValue: null};
     this.submit = this.submit.bind(this);
   }
 
@@ -36,7 +38,7 @@ class CheckoutForm extends Component {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({charges: {
-          donation_percentage: 10,
+          donation_percentage: this.state.donationValue,
           stripeToken: token.id,
           amount: price,
           description: this.props.section.title,
@@ -55,12 +57,28 @@ class CheckoutForm extends Component {
 
   }
 
+  handleDonationPercentage = (e, data) => {
+    console.log("Category Value", data.value)
+    this.setState({
+      donationValue: data.value
+    })
+  }
+
   render() {
     // if (this.state.complete) return <h1>Purchase Complete</h1>
     return this.state.complete ? (
         <h1>Purchase Complete — View Your Enrolled Classes</h1>
       ) : (
         <div className="checkout">
+          <p>Co.muse has a 0% platform fee for artists and relies on the generosity of donors like you to operate our service.</p>
+          <Form>
+          <Form.Select
+            name='donationValue'
+            onChange={(e, data) => this.handleDonationPercentage(e, data)}
+            fluid label='Thank you for including a tip of:'
+            options={options}
+            placeholder='Tip %'/>
+          </Form>
           <p>Would you like to complete the purchase?</p>
           <CardElement />
           <button onClick={this.submit}>Purchase Class</button>
