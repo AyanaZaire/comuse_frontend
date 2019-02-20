@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
+// const HOST_URL = 'http://localhost:3000'
 
 class SectionCard extends Component {
 
@@ -12,7 +14,7 @@ class SectionCard extends Component {
     return (
         <Card
           onClick={() => this.props.history.push(`/class/${this.props.section.id}`)}>
-          <Image src={this.props.section.img_url} />
+          <Image src={HOST_URL + this.props.section.photo_url} />
           <Card.Content>
             <Card.Header>{this.props.section.title}</Card.Header>
             <Card.Meta>
