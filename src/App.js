@@ -188,7 +188,7 @@ class App extends Component {
       //   "Content-Type": "application/json",
       //   "Accept": "application/json"
       // },
-      body: {section: formData}
+      body: formData
       // JSON.stringify({section: {
       //   title: title,
       //   duration: duration,
