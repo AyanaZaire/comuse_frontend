@@ -166,7 +166,7 @@ class App extends Component {
 
   handleNewSection = (teacher_id, value, e, formData) => {
     // console.log("Handle New Section", teacher_id, value, e)
-    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url} = value
+    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url, img_upload} = value
     console.log('New member value', value)
     formData.append('name', title)
     formData.append('email', duration)
