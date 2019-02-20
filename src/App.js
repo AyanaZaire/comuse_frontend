@@ -130,11 +130,11 @@ class App extends Component {
     formData.append('photo', value.img_upload)
     fetch(MEMBERS_URL + `/${id}`, {
       method: "PATCH",
-      // headers: {
-      //   "Authorization": `Bearer ${localStorage.getItem("token")}`
-      //   // "Content-Type": "application/json",
-      //   // "Accept": "application/json"
-      // },
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+        // "Content-Type": "application/json",
+        // "Accept": "application/json"
+      },
       body: formData
       // body: JSON.stringify({
       //   name: value.name,
