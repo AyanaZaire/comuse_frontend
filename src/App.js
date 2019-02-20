@@ -164,31 +164,45 @@ class App extends Component {
     e.currentTarget.reset()
   }
 
-  handleNewSection = (teacher_id, value, e) => {
+  handleNewSection = (teacher_id, value, e, formData) => {
     // console.log("Handle New Section", teacher_id, value, e)
     const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url} = value
+    console.log('New member value', value)
+    formData.append('name', title)
+    formData.append('email', duration)
+    formData.append('password', category_id)
+    formData.append('skill', teacher_id)
+    formData.append('location', description)
+    formData.append('website', location)
+    formData.append('bio', price)
+    formData.append('bio', materials_provided)
+    formData.append('bio', materials_to_bring)
+    formData.append('bio', faqs)
+    formData.append('img_url', img_url)
+    formData.append('photo', img_upload)
     // debugger
     fetch(SECTIONS_URL, {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({section: {
-        title: title,
-        duration: duration,
-        category_id: category_id,
-        teacher_id: teacher_id,
-        description: description,
-        location: location,
-        price: price,
-        materials_provided: materials_provided,
-        materials_to_bring: materials_to_bring,
-        faqs: faqs,
-        img_url: img_url
-        }
-      })
+      // headers: {
+      //   "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      //   "Content-Type": "application/json",
+      //   "Accept": "application/json"
+      // },
+      body: {section: formData}
+      // JSON.stringify({section: {
+      //   title: title,
+      //   duration: duration,
+      //   category_id: category_id,
+      //   teacher_id: teacher_id,
+      //   description: description,
+      //   location: location,
+      //   price: price,
+      //   materials_provided: materials_provided,
+      //   materials_to_bring: materials_to_bring,
+      //   faqs: faqs,
+      //   img_url: img_url
+      //   }
+      // })
     })
     .then(response => response.json())
     .then(data => {

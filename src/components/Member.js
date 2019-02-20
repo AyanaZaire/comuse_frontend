@@ -35,7 +35,8 @@ class Member extends Component {
       materials_provided: '',
       materials_to_bring: '',
       faqs: '',
-      img_url: ''
+      img_url: '',
+      img_upload: null
     },
     value: {
       name: '',
@@ -111,7 +112,7 @@ class Member extends Component {
     })
   }
 
-  handleFile = (e) => {
+  handleUpdateMemberFile = (e) => {
     this.setState({
       value: {
         ...this.state.value,
@@ -120,14 +121,14 @@ class Member extends Component {
     })
   }
 
-  // handleSectionFile = (e) => {
-  //   this.setState({
-  //     sectionValue: {
-  //       ...this.state.sectionValue,
-  //       img_upload: e.currentTarget.files[0]
-  //     }
-  //   })
-  // }
+  handleNewSectionFile = (e) => {
+    this.setState({
+      sectionValue: {
+        ...this.state.sectionValue,
+        img_upload: e.currentTarget.files[0]
+      }
+    })
+  }
 
 
   render() {
@@ -180,7 +181,8 @@ class Member extends Component {
                   <Form
                   onSubmit={ e => {
                     e.preventDefault()
-                    this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e)
+                    const formData = new FormData()
+                    this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e, formData)
                     this.props.history.push('/')
                   }}>
                   <Form.Group widths='equal'>
@@ -219,12 +221,13 @@ class Member extends Component {
                       fluid label='Price'
                       placeholder='Price' />
                   </Form.Group>
-                    <Form.Input
-                      name='img_url'
-                      value={this.state.sectionValue.img_url}
-                      onChange={this.handleSectionFormChange}
-                      fluid label='Image Url'
-                      placeholder='Include the image url that will be the "profile photo" of your class' />
+                  <Form.Input
+                    name='img_upload'
+                    type= 'file'
+                    // value={this.state.value.img_url}
+                    onChange={this.handleNewSectionFile}
+                    fluid label='Upload Your Section Display Photo'
+                    placeholder='Include the image that will be your section display photo' />
                   <Form.TextArea
                     name='description'
                     value={this.state.sectionValue.description}
@@ -323,9 +326,9 @@ class Member extends Component {
                       name='img_upload'
                       type= 'file'
                       // value={this.state.value.img_url}
-                      onChange={this.handleFile}
+                      onChange={this.handleUpdateMemberFile}
                       fluid label='Upload Your Profile Photo'
-                      placeholder='Include the image url that will be your "profile photo"' />
+                      placeholder='Include the image that will be your "profile photo"' />
                 <Form.TextArea
                   name='bio'
                   value={this.state.value.bio}

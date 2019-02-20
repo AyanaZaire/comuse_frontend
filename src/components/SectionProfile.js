@@ -157,6 +157,15 @@ class SectionProfile extends Component {
       // e.currentTarget.reset()
     }
 
+    handleEditSectionFile = () => {
+      this.setState({
+        value: {
+          ...this.state.value,
+          img_upload: e.currentTarget.files[0]
+        }
+      })
+    }
+
 
   render() {
     // console.log("Section state", this.state)
@@ -218,12 +227,13 @@ class SectionProfile extends Component {
                       fluid label='Price'
                       placeholder='Price' />
                   </Form.Group>
-                    <Form.Input
-                      name='img_url'
-                      value={this.state.value.img_url}
-                      onChange={this.handleChange}
-                      fluid label='Image Url'
-                      placeholder='Include the image url that will be the "profile photo" of your class' />
+                  <Form.Input
+                    name='img_upload'
+                    type= 'file'
+                    // value={this.state.value.img_url}
+                    onChange={this.handleEditSectionFile}
+                    fluid label='Upload Your Updated Section Display Photo'
+                    placeholder='Include the image that will be your section display photo' />
                   <Form.TextArea
                     name='description'
                     value={this.state.value.description}
