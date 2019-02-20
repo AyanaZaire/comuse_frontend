@@ -157,7 +157,7 @@ class SectionProfile extends Component {
       // e.currentTarget.reset()
     }
 
-    handleEditSectionFile = () => {
+    handleEditSectionFile = (e) => {
       this.setState({
         value: {
           ...this.state.value,
