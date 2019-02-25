@@ -276,7 +276,7 @@ class App extends Component {
       })
       this.setState({
         allSections: editedSection
-      })
+      }, () => console.log(editedSection))
     })
     // e.currentTarget.querySelectorAll('input').reset()
   }

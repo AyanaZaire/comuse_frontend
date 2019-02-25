@@ -284,7 +284,7 @@ class SectionProfile extends Component {
             >
              {/* <Image src='' size='tiny' circular /> */}
              <Image
-               style={{width: "100px", height: "100px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${this.props.section.teacher.img_url})`}}
+               style={{width: "100px", height: "100px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${HOST_URL + this.props.section.teacher.photo_url})`}}
              />&nbsp;  <a
                   style={{color: 'black', textDecoration: 'underline'}}
                   onClick={() => this.props.history.push(`/member/${this.props.section.teacher.id}`)}>
