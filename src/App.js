@@ -180,7 +180,6 @@ class App extends Component {
     formData.append('faqs', faqs)
     formData.append('img_url', img_url)
     formData.append('photo', img_upload)
-    // debugger
     fetch(SECTIONS_URL, {
       method: "POST",
       // headers: {
@@ -232,7 +231,7 @@ class App extends Component {
   handleEditSection = (value, id, e, formData) => {
     console.log("Edit Section", value, id)
     const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url, img_upload} = value
-    console.log('New member value', value)
+    console.log('New course values', value)
     formData.append('title', title)
     formData.append('duration', duration)
     formData.append('category_id', category_id)
@@ -244,6 +243,7 @@ class App extends Component {
     formData.append('faqs', faqs)
     formData.append('img_url', img_url)
     formData.append('photo', img_upload)
+    console.log('Form data', formData)
     fetch(SECTIONS_URL + `/${id}`, {
       method: "PATCH",
       // headers: {

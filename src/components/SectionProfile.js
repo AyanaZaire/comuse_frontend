@@ -7,6 +7,7 @@ import CheckoutForm from './CheckoutForm';
 
 const COURSES_URL = 'https://comuse-backend.herokuapp.com/api/v1/course'
 const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
 
 // const COURSES_URL = 'http://localhost:3000/api/v1/course'
 // const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
@@ -404,7 +405,7 @@ class SectionProfile extends Component {
                   return <Card
                     onClick={() => this.props.history.push(`/class/${section.id}`)}
                     >
-                    <Image src={section.img_url} />
+                    <Image src={HOST_URL + section.photo_url} />
                     <Card.Content>
                       <Card.Header>{section.title}</Card.Header>
                       {/* <Card.Meta>
