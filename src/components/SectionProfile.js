@@ -196,7 +196,8 @@ class SectionProfile extends Component {
                   <Form
                   onSubmit={ e => {
                     e.preventDefault()
-                    this.props.handleEditSection(this.state.value, this.props.section.id, e)
+                    const formData = new FormData()
+                    this.props.handleEditSection(this.state.value, this.props.section.id, e, formData)
                     this.props.history.push(`/class/${this.props.section.id}`)
                   }}>
                   <Form.Group widths='equal'>

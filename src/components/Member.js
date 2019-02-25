@@ -367,7 +367,7 @@ class Member extends Component {
                     return <Card
                       onClick={() => this.props.history.push(`/class/${section.id}`)}
                       >
-                      <Image src={section.img_url} />
+                      <Image src={HOST_URL + section.photo_url} />
                       <Card.Content>
                         <Card.Header>{section.title}</Card.Header>
                         {/* <Card.Meta>
@@ -412,7 +412,7 @@ class Member extends Component {
                     return <Card
                       onClick={() => this.props.history.push(`/class/${enrolls.section.id}`)}
                       >
-                      <Image src={enrolls.section.img_url} />
+                      <Image src={HOST_URL + enrolls.section.photo_url} />
                       <Card.Content>
                         <Card.Header>{enrolls.section.title}</Card.Header>
                         {/* <Card.Meta>

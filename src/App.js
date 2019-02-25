@@ -229,26 +229,41 @@ class App extends Component {
       });
   }
 
-  handleEditSection = (value, id, e) => {
+  handleEditSection = (value, id, e, formData) => {
     console.log("Edit Section", value, id)
+    const {title, duration, category_id, description, location, price, materials_provided, materials_to_bring, faqs, img_url, img_upload} = value
+    console.log('New member value', value)
+    formData.append('title', title)
+    formData.append('duration', duration)
+    formData.append('category_id', category_id)
+    formData.append('teacher_id', teacher_id)
+    formData.append('description', description)
+    formData.append('location', location)
+    formData.append('price', price)
+    formData.append('materials_provided', materials_provided)
+    formData.append('materials_to_bring', materials_to_bring)
+    formData.append('faqs', faqs)
+    formData.append('img_url', img_url)
+    formData.append('photo', img_upload)
     fetch(SECTIONS_URL + `/${id}`, {
       method: "PATCH",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        title: value.title,
-        duration: value.duration,
-        description: value.description,
-        location: value.location,
-        price: value.price,
-        materials_provided: value.materials_provided,
-        materials_to_bring: value.materials_to_bring,
-        faqs: value.faqs,
-        img_url: value.img_url
-      })
+      // headers: {
+      //   "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      //   "Content-Type": "application/json",
+      //   "Accept": "application/json"
+      // },
+      body: formData
+      // JSON.stringify({
+      //   title: value.title,
+      //   duration: value.duration,
+      //   description: value.description,
+      //   location: value.location,
+      //   price: value.price,
+      //   materials_provided: value.materials_provided,
+      //   materials_to_bring: value.materials_to_bring,
+      //   faqs: value.faqs,
+      //   img_url: value.img_url
+      // })
     })
     .then(response => response.json())
     .then(data => {
