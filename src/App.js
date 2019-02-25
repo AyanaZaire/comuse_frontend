@@ -236,7 +236,6 @@ class App extends Component {
     formData.append('title', title)
     formData.append('duration', duration)
     formData.append('category_id', category_id)
-    formData.append('teacher_id', teacher_id)
     formData.append('description', description)
     formData.append('location', location)
     formData.append('price', price)
