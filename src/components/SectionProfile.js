@@ -15,6 +15,14 @@ const HOST_URL = 'https://comuse-backend.herokuapp.com'
 let counter = 1
 let editCounter = 1
 
+const options = [
+    { key: 'art', text: 'Arts', value: 1 },
+    { key: 'textile', text: 'Textile', value: 2 },
+    { key: 'music', text: 'Music', value: 3 },
+    { key: 'tech', text: 'Technology', value: 4 },
+    { key: 'design', text: 'Design', value: 5 }
+  ]
+
 class SectionProfile extends Component {
 
   state = {
@@ -33,6 +41,7 @@ class SectionProfile extends Component {
     value: {
       title:'',
       duration: '',
+      category_id: null,
       description: '',
       location: '',
       price: '',
@@ -73,6 +82,25 @@ class SectionProfile extends Component {
       value: {
         ...this.state.value,
         [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  handleCategoryId = (e, data) => {
+    // console.log("Category Id", data.value)
+    this.setState({
+      value: {
+        ...this.state.value,
+        category_id: data.value
+      }
+    })
+  }
+
+  handleEditSectionFile = (e) => {
+    this.setState({
+      value: {
+        ...this.state.value,
+        img_upload: e.currentTarget.files[0]
       }
     })
   }
@@ -158,22 +186,20 @@ class SectionProfile extends Component {
       // e.currentTarget.reset()
     }
 
-    handleEditSectionFile = (e) => {
-      this.setState({
-        value: {
-          ...this.state.value,
-          img_upload: e.currentTarget.files[0]
-        }
-      })
-    }
-
 
   render() {
     // console.log("Section state", this.state)
     // console.log("Props", this.props)
     return this.props.section ? (
     <React.Fragment>
-    <div className='section_profile_topheader'>
+    <div
+    // className='section_profile_topheader'
+    // height: 300px;
+    // background-image: url('https://images.unsplash.com/photo-1534511902651-6ab0ce131f2a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f1ff38d33bc2a28f5c08b7936e12c239&auto=format&fit=crop&w=1489&q=80');
+    // background-position: center;
+    // background-size: cover;
+    style={{height: "300px", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${HOST_URL + this.props.section.photo_url})`}}
+    >
       {/* <Button floated='left'>View Photos</Button> */}
     </div>
     <div className="App">
@@ -208,6 +234,12 @@ class SectionProfile extends Component {
                       onChange={this.handleChange}
                       fluid label='Title'
                       placeholder='Title' />
+                   <Form.Select
+                      name='category_id'
+                      onChange={(e, data) => this.handleCategoryId(e, data)}
+                      fluid label='Category'
+                      options={options}
+                      placeholder='Category'/>
                     <Form.Input
                       name='duration'
                       value={this.state.value.duration}
