@@ -8,6 +8,7 @@ import CheckoutForm from './CheckoutForm';
 const COURSES_URL = 'https://comuse-backend.herokuapp.com/api/v1/course'
 const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
 const HOST_URL = 'https://comuse-backend.herokuapp.com'
+const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' 
 
 // const COURSES_URL = 'http://localhost:3000/api/v1/course'
 // const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
@@ -188,6 +189,13 @@ class SectionProfile extends Component {
 
 
   render() {
+
+    let stripeURL
+    if (this.props.currentMember) {
+      stripeURL = `https://connect.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write&redirect_uri=` + REDIRECT_URI_URL + `/api/v1/oauth/callback&state=${this.props.currentMember.id}`
+    } else {
+      stripeURL = null
+    }
     // console.log("Section state", this.state)
     // console.log("Props", this.props)
     return this.props.section ? (
