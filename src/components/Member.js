@@ -154,25 +154,23 @@ class Member extends Component {
               src={this.props.member.img_url}
             /> */}
         </div>
-          <Header as='h1'
-            // textAlign='center'
-            >
+          <Header as='h1'>
             {this.props.member.name}
           </Header>
           <div><Icon name='lightbulb outline' /> {`${this.props.member.skill}`}</div>
           <div><Icon name='map pin' /> {`${this.props.member.location}`}</div>
           <div><Icon name='globe' /> {`${this.props.member.website}`}</div>
 
-          <br></br>
-
-          {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-          <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
-          ) : (null)}
+        {/*  // <br></br>
+          //
+          // {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+          // <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+          // ) : (null)} */}
 
           <br></br><br></br>
 
           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-            this.props.member.stripe_uid == null ? <Modal trigger={<Button>Create New Class</Button>}>
+            this.props.member.stripe_uid == null ? <Modal trigger={<Button secondary>Create New Class</Button>}>
               <Modal.Header>Connect with Stripe to Create Class</Modal.Header>
               <Modal.Content scrolling>
                 <Modal.Description>

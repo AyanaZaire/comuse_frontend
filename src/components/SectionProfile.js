@@ -389,7 +389,15 @@ class SectionProfile extends Component {
                   </Modal>
                   ) : (
                     //handling max_student validation in handleEnrollButton function
-                      this.props.section.enrolled.length >= course.student_max ? <Button>Class is full!</Button> : <Modal trigger={<Button
+                      this.props.section.enrolled.length >= course.student_max ? <Button>Class is full!</Button> : this.props.currentMember.stripe_uid == null ? <Modal trigger={<Button secondary>Enroll</Button>}>
+                        <Modal.Header>Connect with Stripe to Create Class</Modal.Header>
+                        <Modal.Content scrolling>
+                          <Modal.Description>
+                            <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+                          </Modal.Description>
+                        </Modal.Content>
+                      </Modal>
+                      : <Modal trigger={<Button
                         color='black'
                         size='mini'
                         floated='right'
