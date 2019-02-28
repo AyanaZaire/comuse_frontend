@@ -172,6 +172,15 @@ class Member extends Component {
           <br></br><br></br>
 
           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
+            this.props.member.stripe_uid == null ? <Modal trigger={<Button>Create New Class</Button>}>
+              <Modal.Header>Connect with Stripe to Create Class</Modal.Header>
+              <Modal.Content scrolling>
+                <Modal.Description>
+                  <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
+            :
           <Modal trigger={<Button secondary>Create New Class</Button>} >
             <Modal.Header>Create a New Class</Modal.Header>
             <Modal.Content scrolling>
