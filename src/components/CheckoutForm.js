@@ -10,8 +10,8 @@ const options = [
     // { key: 'other', text: 'Other', value: '' }
   ]
 
-const CHARGE_URL = "https://comuse-backend.herokuapp.com/api/v1/charge"
-// const CHARGE_URL = "http://localhost:3000/api/v1/charge"
+// const CHARGE_URL = "https://comuse-backend.herokuapp.com/api/v1/charge"
+const CHARGE_URL = "http://localhost:3000/api/v1/charge"
 
 class CheckoutForm extends Component {
   constructor(props) {

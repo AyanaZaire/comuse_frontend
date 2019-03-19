@@ -2,11 +2,46 @@
   width: 80%;
   margin: 0 auto;
   padding: 50px 0;
+  font-family: 'Work Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h2 {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h3 {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h4 {
+  font-family: 'Work Sans', sans-serif;
+}
+
+h5 {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.ui.card>.content>.header, .ui.cards>.card>.content>.header {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.ui.header {
+  font-family: 'Work Sans', sans-serif;
 }
 
 /* HEADER TRANSPARENCY*/
 .ui.inverted.menu {
-    background: rgba(0, 0, 0, 0);
+  font-family: 'Work Sans', sans-serif;
+  background: rgba(0, 0, 0, 0);
+}
+
+.ui.menu .item {
+  font-family: 'Work Sans', sans-serif;
+  color: #1b1c1d!important;
 }
 
 /* HEADER FONT COLOR */
@@ -28,6 +63,10 @@
 
 .a {
   color: rgba(0,0,0,.87)!important;
+}
+
+.ui.secondary.button {
+  font-family: 'Work Sans', sans-serif;
 }
 
 .member_profile_container {

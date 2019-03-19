@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom';
 
-const HOST_URL = 'https://comuse-backend.herokuapp.com'
-// const HOST_URL = 'http://localhost:3000'
+// const HOST_URL = 'https://comuse-backend.herokuapp.com'
+const HOST_URL = 'http://localhost:3000'
 
 class SectionCard extends Component {
 

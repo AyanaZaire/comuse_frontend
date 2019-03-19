@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import './assets/css/theme-course.css';
 import {Route, Switch} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
@@ -18,17 +19,25 @@ import StripeProfile from './components/StripeProfile';
 
 import SectionContainer from './containers/SectionContainer.js'
 
-const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
-const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
-const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
-const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+import HomeNavBar2 from './components/HomeNavBar2.js'
+import HomeSubscribeHeader from './components/HomeSubscribeHeader.js'
+import HomeFeaturedCourses from './components/HomeFeaturedCourses.js'
+import HomeBio from './components/HomeBio.js'
+import HomeFAQs from './components/HomeFAQs.js'
+import HomeSubscribeFooter from './components/HomeSubscribeFooter.js'
+import HomeFooter from './components/HomeFooter.js'
 
-// const ME_URL = 'http://localhost:3000/api/v1/me'
-// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
-// const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
-// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-// const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
+// const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
+// const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+// const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
+// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+// const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+
+const ME_URL = 'http://localhost:3000/api/v1/me'
+const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
+const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
 // npm run dev to run local version of frontend application
 
 //other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js, NavBar.js, HomeNavBar.js
@@ -375,7 +384,14 @@ class App extends Component {
             render={(props) => {
               return(
                 <React.Fragment>
-                  <div className='home_top_header'>
+                <HomeNavBar2 />
+                <HomeSubscribeHeader />
+                <HomeFeaturedCourses courses={this.state.allSections} />
+                <HomeBio />
+                <HomeFAQs />
+                <HomeSubscribeFooter />
+                <HomeFooter />
+                  {/*<div className='home_top_header'>
                       <HomeNavBar
                         icon="lightbulb outline"
                         member={this.state.member}
@@ -388,19 +404,19 @@ class App extends Component {
                       />
                     <Search  onSearchHandler={this.onSearchHandler} value={this.state.searchTerm}/>
                   </div>
-                  <div className="App">
+                  <div className="App">*/}
                     {/* <Categories
                       categories={this.state.allCategories}
                       onClickCategoryHandler={this.onClickCategoryHandler}
                     /> */}
-                    <Categories
+                    {/*<Categories
                       categories={this.state.allCategories}
                       onClickCategoryHandler={this.onClickCategoryHandler}
                     />
                     {sectionComponent}
                     <br></br><br></br>
                     <Button secondary onClick={this.resetState}>All Classes</Button>
-                  </div>
+                  </div>*/}
                 </React.Fragment>
               )
             }}
@@ -410,11 +426,11 @@ class App extends Component {
             render={() => {
               return(
                 <React.Fragment>
-                <NavBar
+                {/*<NavBar
                   icon="lightbulb outline"
                   member={this.state.member}
                   handleLogOut={this.handleLogOut}
-                />
+                />*/}
                 <div className="App">
                   <LogIn
                     updateMember={this.updateMember}
@@ -429,16 +445,16 @@ class App extends Component {
             render={props => {
               return(
                 <React.Fragment>
-                <NavBar
+                {/*<NavBar
                   icon="lightbulb outline"
                   member={this.state.member}
                   handleLogOut={this.handleLogOut}
-                />
-                <div className="App">
+                />*/}
+                {/*<div className="App">*/}
                   <Signup
                     handleNewMember={this.handleNewMember}
                   />
-                </div>
+                {/*</div>*/}
                 </React.Fragment>
               )
             }}
