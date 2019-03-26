@@ -20,27 +20,30 @@ import StripeProfile from './components/StripeProfile';
 import SectionContainer from './containers/SectionContainer.js'
 
 import HomeNavBar2 from './components/HomeNavBar2.js'
+import NavBar2 from './components/NavBar2.js'
+import ClassesNav from './components/ClassesNav.js'
 import HomeSubscribeHeader from './components/HomeSubscribeHeader.js'
 import HomeFeaturedCourses from './components/HomeFeaturedCourses.js'
 import HomeBio from './components/HomeBio.js'
 import HomeFAQs from './components/HomeFAQs.js'
 import HomeSubscribeFooter from './components/HomeSubscribeFooter.js'
 import HomeFooter from './components/HomeFooter.js'
+import SectionProfile2 from './components/SectionProfile2.js'
 
-// const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
-// const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
-// const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
-// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-// const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
+const ME_URL = 'https://comuse-backend.herokuapp.com/api/v1/me'
+const MEMBERS_URL = 'https://comuse-backend.herokuapp.com/api/v1/members'
+const SECTIONS_URL = 'https://comuse-backend.herokuapp.com/api/v1/section'
+const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+const CATEGORIES_URL = 'https://comuse-backend.herokuapp.com/api/v1/category'
 
-const ME_URL = 'http://localhost:3000/api/v1/me'
-const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
-const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
-const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
+// const ME_URL = 'http://localhost:3000/api/v1/me'
+// const MEMBERS_URL = 'http://localhost:3000/api/v1/members'
+// const SECTIONS_URL = 'http://localhost:3000/api/v1/section'
+// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+// const CATEGORIES_URL = 'http://localhost:3000/api/v1/category'
 // npm run dev to run local version of frontend application
 
-//other urls can be found in /SectionProfile., /Member.js, LogIn.js, CheckoutForm.js, NavBar.js, HomeNavBar.js
+//other urls can be found in /SectionProfile2.js, /Member.js, LogIn.js, CheckoutForm.js, NavBar2.js, HomeNavBar2.js, SectionCard.js
 
 const requestHelper = url =>
   fetch(url, {
@@ -290,9 +293,9 @@ class App extends Component {
     // e.currentTarget.querySelectorAll('input').reset()
   }
 
-  handleEnrollButton = (e, student_id, section, course) => {
-    console.log("Enroll button", student_id, section, course, section.enrolled.length, course.student_max)
-    console.log(section.enrolled.length >= course.student_max)
+  handleEnrollButton = (e, student_id, section) => {
+    console.log("Enroll button", student_id, section, section.enrolled.length)
+    {/*console.log(section.enrolled.length >= course.student_max)*/}
     // if(section.enrolled.length >= course.student_max) {
     //   alert('This class is full!')
     // } else {
@@ -305,8 +308,8 @@ class App extends Component {
         },
         body: JSON.stringify({
           student_id: student_id,
-          section_id: section.id,
-          course_id: course.id
+          section_id: section.id
+          // course_id: course.id
         })
       })
       .then(response => response.json())
@@ -323,7 +326,7 @@ class App extends Component {
   }
 
   filterSection = () => {
-    return this.state.allSections.filter(section => section.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+    return this.state.allSections.filter(section => section.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
   }
 
   fetchCategories = () => {
@@ -336,7 +339,7 @@ class App extends Component {
 
   onClickCategoryHandler = (event) => {
     let clicked = event.currentTarget.id
-    this.setState({ clickedCategory: clicked });
+    this.setState({ clickedCategory: clicked.split("#")[1] });
   }
 
   filterCategory = () => {
@@ -384,13 +387,29 @@ class App extends Component {
             render={(props) => {
               return(
                 <React.Fragment>
-                <HomeNavBar2 />
-                <HomeSubscribeHeader />
-                <HomeFeaturedCourses courses={this.state.allSections} />
-                <HomeBio />
-                <HomeFAQs />
-                <HomeSubscribeFooter />
-                <HomeFooter />
+                  <HomeNavBar2
+                    member={this.state.member}
+                    handleLogOut={this.handleLogOut}
+                  />
+                  <HomeSubscribeHeader />
+                  <HomeFeaturedCourses courses={this.state.allSections} />
+                  <HomeBio />
+                  <HomeFAQs />
+                  <HomeSubscribeFooter />
+                  <HomeFooter />
+                </React.Fragment>
+              )
+            }}
+          />
+          <Route
+            path="/classes"
+            render={() => {
+              return(
+                <React.Fragment>
+                  <HomeNavBar2
+                    member={this.state.member}
+                    handleLogOut={this.handleLogOut}
+                  />
                   {/*<div className='home_top_header'>
                       <HomeNavBar
                         icon="lightbulb outline"
@@ -401,22 +420,25 @@ class App extends Component {
                       //   }
                       // )}
                         handleLogOut={this.handleLogOut}
-                      />
+                      />*/}
                     <Search  onSearchHandler={this.onSearchHandler} value={this.state.searchTerm}/>
-                  </div>
-                  <div className="App">*/}
+                  {/*</div>*/}
+                  <div className="App">
                     {/* <Categories
                       categories={this.state.allCategories}
                       onClickCategoryHandler={this.onClickCategoryHandler}
                     /> */}
-                    {/*<Categories
+                    <Categories
                       categories={this.state.allCategories}
                       onClickCategoryHandler={this.onClickCategoryHandler}
+                      categorizedSections={sectionComponent}
+                      allClasses={this.resetState}
                     />
-                    {sectionComponent}
+                    <a name="allclasses"></a>
+                    {/*{sectionComponent}
                     <br></br><br></br>
-                    <Button secondary onClick={this.resetState}>All Classes</Button>
-                  </div>*/}
+                    <Button secondary onClick={this.resetState}>All Classes</Button>*/}
+                  </div>
                 </React.Fragment>
               )
             }}
@@ -465,13 +487,8 @@ class App extends Component {
               // console.log("member id props", props);
               return(
                 <React.Fragment>
-                <NavBar
-                  icon="lightbulb outline"
-                  member={this.state.allMembers.find(member => {
-                    // console.log('in find', typeof member.id, typeof props.match.params.memberId);
-                    return member.id == props.match.params.memberId
-                  }
-                )}
+                <NavBar2
+                  member={this.state.member}
                   handleLogOut={this.handleLogOut}
                 />
                 <div className="App">
@@ -497,12 +514,20 @@ class App extends Component {
               // console.log("class id props", props);
               return(
                 <React.Fragment>
-                <NavBar
-                  icon="lightbulb outline"
+                <ClassesNav
                   member={this.state.member}
                   handleLogOut={this.handleLogOut}
                 />
-                  <SectionProfile
+                <SectionProfile2
+                  currentMember={this.state.member}
+                  handleEditSection={this.handleEditSection}
+                  handleEnrollButton={this.handleEnrollButton}
+                  section={this.state.allSections.find(section => {
+                    return section.id == props.match.params.classId
+                  }
+                )}
+                />
+                {/*<SectionProfile
                     currentMember={this.state.member}
                     handleEditSection={this.handleEditSection}
                     handleEnrollButton={this.handleEnrollButton}
@@ -510,7 +535,7 @@ class App extends Component {
                       return section.id == props.match.params.classId
                     }
                   )}
-                  />
+                  />*/}
                 </React.Fragment>
               )
             }}

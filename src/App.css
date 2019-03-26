@@ -5,7 +5,12 @@
   font-family: 'Work Sans', sans-serif;
 }
 
-h1 {
+.open-iconic {
+  width: 16px!important;
+  height: 16px!important;
+}
+
+{/*h1 {
   font-family: 'Work Sans', sans-serif;
 }
 
@@ -23,18 +28,18 @@ h4 {
 
 h5 {
   font-family: 'Work Sans', sans-serif;
-}
+}*/}
 
-.ui.card>.content>.header, .ui.cards>.card>.content>.header {
+{/*.ui.card>.content>.header, .ui.cards>.card>.content>.header {
   font-family: 'Work Sans', sans-serif;
 }
 
 .ui.header {
   font-family: 'Work Sans', sans-serif;
-}
+}*/}
 
 /* HEADER TRANSPARENCY*/
-.ui.inverted.menu {
+{/*.ui.inverted.menu {
   font-family: 'Work Sans', sans-serif;
   background: rgba(0, 0, 0, 0);
 }
@@ -42,7 +47,7 @@ h5 {
 .ui.menu .item {
   font-family: 'Work Sans', sans-serif;
   color: #1b1c1d!important;
-}
+}*/}
 
 /* HEADER FONT COLOR */
 .ui.secondary.inverted.pointing.menu .item {
@@ -93,7 +98,7 @@ h5 {
 }
 
 .home_top_header {
-  height: 600px;
+  height: 300px;
   background-image: url('https://images.unsplash.com/photo-1521623866472-d27232650c9e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6704c159d61c6a995fb741b0ee898d88&auto=format&fit=crop&w=1540&q=80');
   background-position: center;
   background-size: cover;
@@ -104,10 +109,10 @@ h5 {
 }
 
 .search_form {
-	width: 25%;
+	width: 40%;
 	margin: 0 auto;
-  margin-top: 30px;
-	padding: 100px 0;
+  margin-top: 0px;
+	padding: 10px 0;
 }
 
 .section_profile_topheader {

@@ -1,18 +1,41 @@
 import React, {Component} from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+// import { Card, Icon, Image } from 'semantic-ui-react'
+import {Card, Button, Image} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
-// const HOST_URL = 'https://comuse-backend.herokuapp.com'
-const HOST_URL = 'http://localhost:3000'
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
+// const HOST_URL = 'http://localhost:3000'
 
 class SectionCard extends Component {
 
   render() {
+    console.log(this.props.section)
     let price = parseFloat(this.props.section.price)
     let fixedPrice = price.toFixed(2)
 
     return (
-        <Card
+      <React.Fragment>
+      <Card
+        style={{ width: '18rem' }}
+        onClick={() => this.props.history.push(`/class/${this.props.section.id}`)}
+      >
+        <Card.Img variant="top" src="https://i-h1.pinimg.com/564x/f9/1b/05/f91b05d520a79211a4392a04cae52aec.jpg" />
+        <Card.Body>
+          <Card.Title>{this.props.section.title}</Card.Title>
+          {this.props.parent == "profile" ? null : <Card.Subtitle className="mb-2 text-muted">{this.props.section.category.name}</Card.Subtitle>}
+          <Card.Text>
+            {this.props.section.description.substring(0, 70)}...
+          </Card.Text>
+            {this.props.parent == "profile" ? null : <Image
+              style={{width: "30px", height: "30px"}}
+              src="https://avatars1.githubusercontent.com/u/892860?s=460&v=4"
+              roundedCircle/>}
+           {this.props.parent == "profile" ? null : <span style={{paddingLeft: "10px"}}>{this.props.section.teacher.name}</span> }
+          {/*<Button className="right floated" variant="primary">{fixedPrice}</Button>*/}
+        </Card.Body>
+      </Card>
+
+        {/*<Card
           onClick={() => this.props.history.push(`/class/${this.props.section.id}`)}>
           <Image src={HOST_URL + this.props.section.photo_url} />
           <Card.Content>
@@ -35,8 +58,8 @@ class SectionCard extends Component {
                 <Icon name='map pin'/>{this.props.section.location}
               </a>
           </Card.Content>
-        </Card>
-
+        </Card>*/}
+        </React.Fragment>
     );
   }
 }

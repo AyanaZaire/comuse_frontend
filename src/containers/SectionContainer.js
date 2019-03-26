@@ -1,15 +1,26 @@
 import React from 'react'
-import { Card, Header } from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react'
+import {Header} from 'react-bootstrap';
 import SectionCard from '../components/SectionCard.js'
 
 
 const SectionContainer = ({sections}) => {
     return(
-      <div className='section_container'>
-        <Header as='h2'>
-          Classes
-          <Header.Subheader>Learn that new skill you've been curious about</Header.Subheader>
-        </Header>
+      <React.Fragment>
+      {/*<div className='section_container'>*/}
+        <h1>Classes</h1>
+        <p>Learn that new skill you've been curious about</p>
+
+        {/*<CardDeck>
+          {sections.map(section => {
+              return <SectionCard
+              section={section}
+              key={section.id}
+              // clickedSectionFunction={clickedSectionFunction}
+            />}
+          )}
+        </CardDeck>*/}
+
         <Card.Group>
       {sections.map(section => {
           return <SectionCard
@@ -19,7 +30,8 @@ const SectionContainer = ({sections}) => {
         />}
       )}
       </Card.Group>
-      </div>
+      {/*</div>*/}
+    </React.Fragment>
     )
   }
 

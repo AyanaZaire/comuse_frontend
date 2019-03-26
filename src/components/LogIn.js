@@ -4,8 +4,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {withRouter} from 'react-router-dom';
 
-// const BASE_URL = "https://comuse-backend.herokuapp.com/api/v1";
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = "https://comuse-backend.herokuapp.com/api/v1";
+// const BASE_URL = "http://localhost:3000/api/v1";
 
 class LogIn extends Component {
 
@@ -79,7 +79,8 @@ class LogIn extends Component {
         <div class="row justify-content-center mb-md-6">
           <div class="col-auto">
             <a href="/">
-              <img src="assets/img/logo.svg" alt="Leap" />
+              {/*<img src="assets/img/logo.svg" alt="Leap" />*/}
+              Co.muse
             </a>
           </div>
         </div>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 // import { Link } from "react-router-dom";
-import { Icon, Form, Card, Image, Divider, Select, Modal, Header, Button } from 'semantic-ui-react'
+import {Image, Container, Row, Col, Button} from 'react-bootstrap';
+import { Icon, Form, Divider, Select, Header, Card, Modal } from 'semantic-ui-react'
+import SectionCard from './SectionCard.js'
 import {withRouter} from 'react-router-dom';
+{/*import { LightbulbIcon } from 'react-open-iconic-svg';*/}
 
 const options = [
     { key: 'art', text: 'Arts', value: 1 },
@@ -11,13 +14,13 @@ const options = [
     { key: 'design', text: 'Design', value: 5 }
   ]
 
-// const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
-// const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
-// const HOST_URL = 'https://comuse-backend.herokuapp.com'
+const ENROLLED_URL = 'https://comuse-backend.herokuapp.com/api/v1/enrolled'
+const REDIRECT_URI_URL = 'https://comuse-backend.herokuapp.com' //line 93
+const HOST_URL = 'https://comuse-backend.herokuapp.com'
 
-const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
-const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
-const HOST_URL = 'http://localhost:3000'
+// const ENROLLED_URL = 'http://localhost:3000/api/v1/enrolled'
+// const REDIRECT_URI_URL = 'http://localhost:3000' //line 93
+// const HOST_URL = 'http://localhost:3000'
 
 // const stripeURL = `https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_DglFK9m4L867x3ngntwiPhwbFPvPzpCl&scope=read_write`
 
@@ -48,7 +51,8 @@ class Member extends Component {
       website: '',
       // img_url: '',
       img_upload: null
-    }
+    },
+    show: false
   }
 
   // componentDidMount = () => {
@@ -130,6 +134,15 @@ class Member extends Component {
     })
   }
 
+  handleClose = () => {
+   this.setState({ show: false });
+ }
+
+ handleShow = () => {
+   this.setState({ show: true });
+ }
+
+
 
   render() {
     // const UPLOADED_PHOTO = HOST_URL + `${this.props.member.photo_url}`
@@ -144,19 +157,21 @@ class Member extends Component {
 
 
     return this.props.member ? (
-      <div className="member_profile_container">
+      <Container>
+      <Row>
+      <Col sm={3} style={{paddingBottom: "30px"}}>
+      {/*<div className="member_profile_container">*/}
         <div>
 
           <div
             style={{width: "175px", height: "175px", overflow: "hidden", borderRadius: "50%", backgroundPosition: "center", backgroundSize: "cover", backgroundImage: `url(${HOST_URL + this.props.member.photo_url})`}}
             >
-            {/* <Image
-              src={this.props.member.img_url}
-            /> */}
+
         </div>
-          <Header as='h1'>
+          <h1 style={{paddingTop: "50px"}}>
             {this.props.member.name}
-          </Header>
+          </h1>
+          {/*<LightbulbIcon />*/}
           <div><Icon name='lightbulb outline' /> {`${this.props.member.skill}`}</div>
           <div><Icon name='map pin' /> {`${this.props.member.location}`}</div>
           <div><Icon name='globe' /> {`${this.props.member.website}`}</div>
@@ -170,113 +185,112 @@ class Member extends Component {
           <br></br><br></br>
 
           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-            this.props.member.stripe_uid == null ? <Modal trigger={<Button secondary>Create New Class</Button>}>
-              <Modal.Header>Connect with Stripe to Create Class</Modal.Header>
-              <Modal.Content scrolling>
-                <Modal.Description>
-                  <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
-                </Modal.Description>
-              </Modal.Content>
-            </Modal>
-            :
-          <Modal trigger={<Button secondary>Create New Class</Button>} >
-            <Modal.Header>Create a New Class</Modal.Header>
+            this.props.member.stripe_uid == null ? <Modal trigger={<Button>Create New Class</Button>}>
+            <Modal.Header>Connect with Stripe to Create Class</Modal.Header>
             <Modal.Content scrolling>
-              {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
               <Modal.Description>
-                {/* <Header>Default Profile Image</Header> */}
-                  <Form
-                  onSubmit={ e => {
-                    e.preventDefault()
-                    const formData = new FormData()
-                    this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e, formData)
-                    this.props.history.push('/')
-                  }}>
-                  <Form.Group widths='equal'>
-                    <Form.Input
-                      name='title'
-                      value={this.state.sectionValue.title}
-                      onChange={this.handleSectionFormChange}
-                      fluid label='Title'
-                      placeholder='Title' />
-                    <Form.Select
-                      name='category_id'
-                      onChange={(e, data) => this.handleCategoryId(e, data)}
-                      fluid label='Category'
-                      options={options}
-                      placeholder='Category'/>
-                  </Form.Group>
-                  <Form.Group widths='equal'>
-                    <Form.Input
-                      name='duration'
-                      value={this.state.sectionValue.duration}
-                      onChange={this.handleSectionFormChange}
-                      fluid label='Duration'
-                      placeholder='Duration' />
-                    <Form.Input
-                      name='location'
-                      value={this.state.sectionValue.location}
-                      onChange={this.handleSectionFormChange}
-                      fluid label='Location'
-                      placeholder='Location' />
-                    <Form.Input
-                      name='price'
-                      icon='dollar'
-                      iconPosition='left'
-                      value={this.state.sectionValue.price}
-                      onChange={this.handleSectionFormChange}
-                      fluid label='Price'
-                      placeholder='Price' />
-                  </Form.Group>
-                  <Form.Input
-                    name='img_upload'
-                    type= 'file'
-                    // value={this.state.value.img_url}
-                    onChange={this.handleNewSectionFile}
-                    fluid label='Upload Your Section Display Photo'
-                    placeholder='Include the image that will be your section display photo' />
-                  <Form.TextArea
-                    name='description'
-                    value={this.state.sectionValue.description}
-                    onChange={this.handleSectionFormChange}
-                    label='Description'
-                    placeholder='Tell us about the class...' />
-
-                    <Form.TextArea
-                      name='materials_provided'
-                      value={this.state.sectionValue.materials_provided}
-                      onChange={this.handleSectionFormChange}
-                      label='Materials Provided'
-                      placeholder='Tell the students what you will provide for the class...' />
-
-                      <Form.TextArea
-                        name='materials_to_bring'
-                        value={this.state.sectionValue.materials_to_bring}
-                        onChange={this.handleSectionFormChange}
-                        label='Materials to Bring'
-                        placeholder='Tell the students what they should bring to the session...' />
-
-                        <Form.TextArea
-                          name='faqs'
-                          value={this.state.sectionValue.faqs}
-                          onChange={this.handleSectionFormChange}
-                          label='FAQs'
-                          placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
-
-                  <Form.Checkbox
-                    label='I agree to the Terms and Conditions' />
-                  <Form.Button>Create</Form.Button>
-                </Form>
-
+                <a href={stripeURL} class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
               </Modal.Description>
             </Modal.Content>
           </Modal>
+          :
+        <Modal trigger={<Button>Create New Class</Button>} >
+          <Modal.Header>Create a New Class</Modal.Header>
+          <Modal.Content scrolling>
+            <Modal.Description>
+                <Form
+                onSubmit={ e => {
+                  e.preventDefault()
+                  const formData = new FormData()
+                  this.props.handleNewSection(this.props.currentMember.id, this.state.sectionValue, e, formData)
+                  this.props.history.push('/')
+                }}>
+                <Form.Group widths='equal'>
+                  <Form.Input
+                    name='title'
+                    value={this.state.sectionValue.title}
+                    onChange={this.handleSectionFormChange}
+                    fluid label='Title'
+                    placeholder='Title' />
+                  <Form.Select
+                    name='category_id'
+                    onChange={(e, data) => this.handleCategoryId(e, data)}
+                    fluid label='Category'
+                    options={options}
+                    placeholder='Category'/>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                  <Form.Input
+                    name='duration'
+                    value={this.state.sectionValue.duration}
+                    onChange={this.handleSectionFormChange}
+                    fluid label='Duration'
+                    placeholder='Duration' />
+                  <Form.Input
+                    name='location'
+                    value={this.state.sectionValue.location}
+                    onChange={this.handleSectionFormChange}
+                    fluid label='Location'
+                    placeholder='Location' />
+                  <Form.Input
+                    name='price'
+                    icon='dollar'
+                    iconPosition='left'
+                    value={this.state.sectionValue.price}
+                    onChange={this.handleSectionFormChange}
+                    fluid label='Price'
+                    placeholder='Price' />
+                </Form.Group>
+                <Form.Input
+                  name='img_upload'
+                  type= 'file'
+                  // value={this.state.value.img_url}
+                  onChange={this.handleNewSectionFile}
+                  fluid label='Upload Your Section Display Photo'
+                  placeholder='Include the image that will be your section display photo' />
+                <Form.TextArea
+                  name='description'
+                  value={this.state.sectionValue.description}
+                  onChange={this.handleSectionFormChange}
+                  label='Description'
+                  placeholder='Tell us about the class...' />
+
+                  <Form.TextArea
+                    name='materials_provided'
+                    value={this.state.sectionValue.materials_provided}
+                    onChange={this.handleSectionFormChange}
+                    label='Materials Provided'
+                    placeholder='Tell the students what you will provide for the class...' />
+
+                    <Form.TextArea
+                      name='materials_to_bring'
+                      value={this.state.sectionValue.materials_to_bring}
+                      onChange={this.handleSectionFormChange}
+                      label='Materials to Bring'
+                      placeholder='Tell the students what they should bring to the session...' />
+
+                      <Form.TextArea
+                        name='faqs'
+                        value={this.state.sectionValue.faqs}
+                        onChange={this.handleSectionFormChange}
+                        label='FAQs'
+                        placeholder='Will there be food or bev provided? Are there age restrictions? Special directions to find you? etc...' />
+
+                <Form.Checkbox
+                  label='I agree to the Terms and Conditions' />
+                <Form.Button>Create</Form.Button>
+              </Form>
+
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
+
           ) : (null)}
 
           <br></br><br></br>
 
           {this.props.currentMember && this.props.currentMember.id === this.props.member.id ? (
-          <Modal trigger={<Button secondary>Edit Profile</Button>} >
+          <Modal trigger={<Button>Edit Profile</Button>} >
             <Modal.Header>Edit User Profile</Modal.Header>
             <Modal.Content scrolling>
               {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
@@ -353,15 +367,17 @@ class Member extends Component {
           ) : (null)}
 
         </div>
+        </Col>
 
+        <Col sm={9}>
         <div>
           <h3>Bio</h3>
-          <div>{`${this.props.member.bio}`}</div>
+          <div style={{paddingBottom: "30px"}}>{`${this.props.member.bio}`}</div>
           <h3>Classes</h3>
-            <h4>Taught</h4>
+            <h5 style={{paddingBottom: "15px"}}>Taught</h5>
 
             <React.Fragment>
-            <Card.Group>
+            <Card.Group style={{paddingBottom: "30px"}}>
               {this.props.member.sections.map(section => {
                 // console.log('Member map', member)
                 // return member.sections.map(section => {
@@ -371,19 +387,28 @@ class Member extends Component {
                     let price = parseFloat(section.price)
                     let fixedPrice = price.toFixed(2)
 
-                    return <Card
+                    return <SectionCard
+                              onClick={() => this.props.history.push(`/class/${section.id}`)}
+                              section={section}
+                              key={section.id}
+                              parent="profile"
+                              // clickedSectionFunction={clickedSectionFunction}
+                              />
+
+
+                    {/*<Card
                       onClick={() => this.props.history.push(`/class/${section.id}`)}
                       >
                       <Image src={HOST_URL + section.photo_url} />
                       <Card.Content>
-                        <Card.Header>{section.title}</Card.Header>
+                        <Card.Header>{section.title}</Card.Header>*/}
                         {/* <Card.Meta>
                           <span className='date'>{section.category}</span>
                         </Card.Meta> */}
-                        <Card.Description>
+                        {/*<Card.Description>*/}
                           {/* <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' avatar />
                             <span>{section.teacher.name}</span> */}
-                        </Card.Description>
+                        {/*</Card.Description>
                       </Card.Content>
                       <Card.Content extra>
                         <span className="right floated">
@@ -393,7 +418,7 @@ class Member extends Component {
                             <Icon name='map pin'/>{section.location}
                           </a>
                       </Card.Content>
-                    </Card>
+                    </Card>*/}
                   } else {
                     null
                   }
@@ -404,7 +429,7 @@ class Member extends Component {
           </Card.Group>
           </React.Fragment>
 
-            <h4>Enrolled</h4>
+            <h5 style={{paddingBottom: "15px"}}>Enrolled</h5>
 
             <React.Fragment>
             <Card.Group>
@@ -416,19 +441,29 @@ class Member extends Component {
                     let price = parseFloat(enrolls.section.price)
                     let fixedPrice = price.toFixed(2)
 
-                    return <Card
+                    return <SectionCard
+                              onClick={() => this.props.history.push(`/class/${enrolls.section.id}`)}
+                              section={enrolls.section}
+                              key={enrolls.id}
+                              parent="profile"
+                              // clickedSectionFunction={clickedSectionFunction}
+                              />
+
+
+
+                    {/*<Card
                       onClick={() => this.props.history.push(`/class/${enrolls.section.id}`)}
                       >
                       <Image src={HOST_URL + enrolls.section.photo_url} />
                       <Card.Content>
-                        <Card.Header>{enrolls.section.title}</Card.Header>
+                        <Card.Header>{enrolls.section.title}</Card.Header>*/}
                         {/* <Card.Meta>
                           <span className='date'>{section.category}</span>
                         </Card.Meta> */}
-                        <Card.Description>
+                        {/*<Card.Description>*/}
                           {/* <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' avatar />
                             <span>{section.teacher.name}</span> */}
-                        </Card.Description>
+                        {/*</Card.Description>
                       </Card.Content>
                       <Card.Content extra>
                         <span className="right floated">
@@ -438,7 +473,7 @@ class Member extends Component {
                             <Icon name='map pin'/>{enrolls.section.location}
                           </a>
                       </Card.Content>
-                    </Card>
+                    </Card>*/}
                   } else {
                     null
                   }
@@ -456,10 +491,14 @@ class Member extends Component {
 
 
            </div>
+           </Col>
+
         {/* <Link to="/" className="ui button">
           Back Home
         </Link> */}
-      </div>
+      {/*</div>*/}
+      </Row>
+      </Container>
     ) : (
       <div>Loading...</div>
     )

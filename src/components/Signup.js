@@ -126,11 +126,11 @@ class SignUp extends Component {
     <section class="row no-gutters min-vh-100 p-0">
       <div class="col-lg-4 bg-primary-3 d-flex justify-content-end">
         <img src="https://leap.mediumra.re/assets/img/article-9.jpg" alt="Image" class="bg-image" />
-        <div class="divider divider-vertical d-none d-lg-block">
+        {/*<div class="divider divider-vertical d-none d-lg-block">
           <svg width="100%" height="100%" version="1.1" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none">
             <path d="M0,0 L100,0 L100,100 L0,100 C66.6666667,83.3333333 100,66.6666667 100,50 C100,33.3333333 66.6666667,16.6666667 0,0 Z" fill="#ffffff"></path>
           </svg>
-        </div>
+        </div>*/}
       </div>
       <div class="col px-5 position-relative d-flex align-items-center">
         <div class="row justify-content-center w-100">

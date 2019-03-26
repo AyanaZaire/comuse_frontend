@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import { NavLink } from "react-router-dom";
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button, Image} from 'react-bootstrap';
 
-const HOST_URL = 'https://comuse-backend.herokuapp.com'
-// const HOST_URL = 'http://localhost:3000'
-
+// const HOST_URL = 'https://comuse-backend.herokuapp.com'
+const HOST_URL = 'http://localhost:3000'
 const IMAGE = <Image
   style={{width: "30px", height: "30px"}}
   src="https://avatars1.githubusercontent.com/u/892860?s=460&v=4"
@@ -12,13 +11,21 @@ const IMAGE = <Image
 />
 
 
-class HomeNavBar2 extends Component {
+class ClassesNav extends Component {
 
   render() {
     return (
       <React.Fragment>
-        <div className="navbar-container bg-primary-3">
-          <Navbar bg="light" expand="lg" className="navbar navbar-expand-lg navbar-dark bg-primary-3" sticky="top">
+        <div
+        className="navbar-container"
+        style={{backgroundColor: "#FFFFFF"}}
+        >
+          <Navbar
+            data-overlay
+            expand="lg"
+            className="navbar-dark"
+            data-sticky="top"
+          >
             <div className="container">
               <Navbar.Brand href="/">Co.muse</Navbar.Brand>
               {/*<a className="navbar-brand fade-page" href="/">
@@ -82,4 +89,4 @@ class HomeNavBar2 extends Component {
   }
 }
 
-export default HomeNavBar2;
+export default ClassesNav;
